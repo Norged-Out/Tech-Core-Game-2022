@@ -1047,6 +1047,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1351676248 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2906534157812164783, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
+  m_PrefabInstance: {fileID: 1948114500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1351676251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351676248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6655dbc3b73f4545a83c32d7fdf4625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapComponent: {fileID: 5835016340870235104, guid: 71b6fade7695b354184c7d378a6c7153, type: 3}
+  mapComponentSize: 0.1
+  width: 230
+  height: 40
+  layer: -1
+  baseHeight: 0.01
 --- !u!1 &1416501747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,11 +1578,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2906534157812164780, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
       propertyPath: width
-      value: 255
+      value: 230
       objectReference: {fileID: 0}
     - target: {fileID: 2906534157812164780, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
       propertyPath: height
-      value: 50
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906534157812164780, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
+      propertyPath: baseHeight
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2906534157812164780, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
       propertyPath: mapComponent
@@ -1575,7 +1602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2906534157812164781, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.7
+      value: -11.45
       objectReference: {fileID: 0}
     - target: {fileID: 2906534157812164781, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1617,7 +1644,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapGenerator
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2906534157812164780, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
 --- !u!1 &1954206892
 GameObject:
