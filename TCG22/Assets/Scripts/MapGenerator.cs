@@ -102,7 +102,7 @@ public class MapGenerator : MonoBehaviour
 
         // cleans up map in different ways
         int mapStyle = rand.Next(1, 5);
-        for (int i = 0; i < 4; i++) 
+        for (int i = 0; i < 3; i++) 
         {
             if (mapStyle == 1)
             {
@@ -125,7 +125,10 @@ public class MapGenerator : MonoBehaviour
                 //Debug.Log("Sides In");
             }
         }
+        
+        CleanMap();
 
+        // goes through map and creates objects and selects the correct material
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -307,7 +310,27 @@ public class MapGenerator : MonoBehaviour
         }
 
         return count;
+    }
 
+    void CleanMap()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int surroundingComponentes = CountSurroundingComponents(x, y);
+
+                // checks the left side 
+                if (surroundingComponentes > 4)
+                {
+                    grid[x, y] = 1;
+                }
+                else if (surroundingComponentes < 4)
+                {
+                    grid[x, y] = 0;
+                }
+            }
+        }
     }
 
     int CountObjectAbove(int x, int y)
