@@ -40,6 +40,11 @@ public class MapGenerator : MonoBehaviour
     // stores objects
     private GameObject[,] objectGrid;
 
+    // Handles Random Values
+    public bool useSeed = false;
+    public int seed = 0;
+    private System.Random rand;
+
     // colors of object in game
     private Color32 GREEN = new Color32(153, 230, 79, 255);
     private Color32 DARK_GREEN = new Color32(104, 185, 60, 255);
@@ -51,6 +56,14 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (useSeed)
+        {
+            rand = new System.Random(seed);
+        }
+        else 
+        {
+            rand = new System.Random();
+        }
         grid =  new int[width, height];
         objectGrid = new GameObject[width, height];
 
@@ -71,7 +84,7 @@ public class MapGenerator : MonoBehaviour
                     grid[x, y] = 1;
                 }
                 // odds of block spawn decrease as y increases
-                else if (Random.Range(1, 101) < height - y)
+                else if (rand.Next(1, 101) < height - y)
                 {
                     grid[x, y] = 1;
                 }
@@ -88,8 +101,8 @@ public class MapGenerator : MonoBehaviour
         randomFillGrid();
 
         // cleans up map in different ways
-        int mapStyle = Random.Range(1, 5);
-        for (int i = 0; i < 3; i++) 
+        int mapStyle = rand.Next(1, 5);
+        for (int i = 0; i < 4; i++) 
         {
             if (mapStyle == 1)
             {
