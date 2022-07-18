@@ -87,9 +87,30 @@ public class MapGenerator : MonoBehaviour
     {
         randomFillGrid();
 
+        // cleans up map in different ways
+        int mapStyle = Random.Range(1, 5);
         for (int i = 0; i < 3; i++) 
         {
-            CleanMap();
+            if (mapStyle == 1)
+            {
+                //Debug.Log("Middle Out");
+                CleanMapMiddleOut();
+            }
+            else if (mapStyle == 2)
+            {
+                CleanMapLeftToRight();
+                //Debug.Log("Left To Right");
+            }
+            else if (mapStyle == 3)
+            {
+                CleanMapRightToLeft();
+                //Debug.Log("Right To Left");
+            }
+            else 
+            {
+                CleanMapSidesIn();
+                //Debug.Log("Sides In");
+            }
         }
 
         for (int x = 0; x < width; x++)
@@ -149,23 +170,108 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
-    void CleanMap() 
+    void CleanMapMiddleOut() 
+    {
+        for (int x = 0; x < width / 2; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int surroundingComponentesLeft = CountSurroundingComponents((width / 2) - x, y);
+                int surroundingComponentesRight = CountSurroundingComponents((width / 2) + x, y);
+                
+                // checks the left side 
+                if (surroundingComponentesLeft >= 4)
+                {
+                    grid[(width / 2) - x, y] = 1;
+                } 
+                else if (surroundingComponentesLeft < 4)
+                {
+                    grid[(width / 2) - x, y] = 0;
+                }
+
+                // checks the right side
+                if (surroundingComponentesRight >= 4)
+                {
+                    grid[(width / 2) + x, y] = 1;
+                }
+                else if (surroundingComponentesRight < 4)
+                {
+                   grid[(width / 2) + x, y] = 0;
+                }
+            }
+        }
+    }
+
+    void CleanMapSidesIn()
+    {
+        for (int x = 0; x < width / 2; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int surroundingComponentesLeft = CountSurroundingComponents(x, y);
+                int surroundingComponentesRight = CountSurroundingComponents((width - 1 - x), y);
+
+                // checks the left side 
+                if (surroundingComponentesLeft >= 4)
+                {
+                    grid[x, y] = 1;
+                }
+                else if (surroundingComponentesLeft < 4)
+                {
+                    grid[x, y] = 0;
+                }
+
+                // checks the right side
+                if (surroundingComponentesRight >= 4)
+                {
+                    grid[(width - 1 - x), y] = 1;
+                }
+                else if (surroundingComponentesRight < 4)
+                {
+                    grid[(width - 1 - x), y] = 0;
+                }
+            }
+        }
+    }
+
+    void CleanMapLeftToRight()
     {
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 int surroundingComponentes = CountSurroundingComponents(x, y);
-                
+
+                // checks the left side 
                 if (surroundingComponentes >= 4)
                 {
                     grid[x, y] = 1;
-                } 
+                }
                 else if (surroundingComponentes < 4)
                 {
                     grid[x, y] = 0;
                 }
-                
+            }
+        }
+    }
+
+    void CleanMapRightToLeft()
+    {
+        for (int x = (width - 1); x >= 0; x--)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int surroundingComponentes = CountSurroundingComponents(x, y);
+
+                // checks the left side 
+                if (surroundingComponentes >= 4)
+                {
+                    grid[x, y] = 1;
+                }
+                else if (surroundingComponentes < 4)
+                {
+                    grid[x, y] = 0;
+                }
             }
         }
     }
