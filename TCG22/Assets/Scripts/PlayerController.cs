@@ -31,11 +31,15 @@ public class PlayerController : MonoBehaviour
     private bool isOnGround = true;
 
     private bool canMove;
-    private int movementTime = 10; // time in seconds
+    private int movementTime = 10; // time in seconds; default 10
 
     private bool canAttack;
-    private int attackTime = 30; // time in seconds 
+    private int attackTime = 30; // time in seconds; default 30 
     private Vector3 projectileOffset = Vector3.up * 2;
+    public float launchPower = 10;
+    public Vector3 launchVelocityVector;
+    public Vector3 launchPositionVector;
+
 
     // Start is called before the first frame update
     void Start()
@@ -74,10 +78,14 @@ public class PlayerController : MonoBehaviour
             Jump();    
         }
 
+        launchVelocityVector = (transform.forward + transform.up) * launchPower;
+        launchPositionVector = transform.position + projectileOffset;
         // Launch a projectile from the player on left click
         if (Input.GetMouseButtonDown(0) && canAttack)
         {
-            Instantiate(projectilePrefab, transform.position + projectileOffset, transform.rotation); //projectilePrefab.transform.rotation);
+            GameObject projectile = Instantiate(projectilePrefab, launchPositionVector, transform.rotation);
+            projectile.GetComponent<Rigidbody>().velocity = launchVelocityVector;
+            projectile.GetComponent<Rigidbody>().angularVelocity = transform.right * launchPower;
         }
     }
 
