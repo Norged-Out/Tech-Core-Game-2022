@@ -11,9 +11,9 @@ using UnityEngine;
  *            int width: Stores the width of the map this is measured in the number of mapComponents you wish the map to be made out off
  *            int height: Stores the height of the mpa this is measured in the number of mapComponents you wish the map to be made out off
  *            float layer: Stores the z axis of the object to ensure it is infront of all other objects
+ *            float baseHeight: Stores a decimal representation of what percentage of the bottom of the map should be filled in
  *            int[,] grid: This varable holds a grids of 0,1 of the size width x height a zero represents an empty space and a 1 represents 
  *                         a map component in a given location.
- *            int randomFillPercent: The variable represents the percentage chance any space on the map will initially be filled with a mapComponents.
  */
 
 
@@ -32,17 +32,40 @@ public class MapGenerator : MonoBehaviour
     // stores layer the object is on
     public float layer;
 
+    // stores a decimal of what percent of the bottom of the map will be filled in
+    public float baseHeight = .125f;
+
     // stores an array representing the map
     private int[,] grid;
+    // stores objects
+    private GameObject[,] objectGrid;
 
-    // stores the percent of the map that will be filled
-    private int randomFillPercent;
+    // Handles Random Values
+    public bool useSeed = false;
+    public int seed = 0;
+    private System.Random rand;
+
+    // colors of object in game
+    private Color32 GREEN = new Color32(153, 230, 79, 255);
+    private Color32 DARK_GREEN = new Color32(104, 185, 60, 255);
+    private Color32 BROWN = new Color32(138, 84, 54, 255);
+    private Color32 LIGHT_BROWN = new Color32(151, 84, 50, 255);
+    private Color32 DARK_BROWN = new Color32(117, 64, 59, 255);
+    private Color32 DARKEST_BROWN = new Color32(100, 59, 48, 255);
 
     // Start is called before the first frame update
     void Start()
     {
-        randomFillPercent = 5;
+        if (useSeed)
+        {
+            rand = new System.Random(seed);
+        }
+        else 
+        {
+            rand = new System.Random();
+        }
         grid =  new int[width, height];
+        objectGrid = new GameObject[width, height];
 
         GenerateMap();
     }
@@ -50,17 +73,18 @@ public class MapGenerator : MonoBehaviour
     // Randomly adds values to the grid based on the randomFillPercent value
     void randomFillGrid()
     {
+        float topOfBase = baseHeight * height;
         for (int x = 0; x < width; x++) 
         {
             for (int y = 0; y < height; y++)
             {
                 // the bottom 1/4 is always filled
-                if (y < (height / 4)) 
+                if (y < topOfBase) 
                 {
                     grid[x, y] = 1;
                 }
-                
-                else if (Random.Range(1, 101) < (randomFillPercent - (y - height)))
+                // odds of block spawn decrease as y increases
+                else if (rand.Next(1, 101) < height - y)
                 {
                     grid[x, y] = 1;
                 }
@@ -76,11 +100,35 @@ public class MapGenerator : MonoBehaviour
     {
         randomFillGrid();
 
+        // cleans up map in different ways
+        int mapStyle = rand.Next(1, 5);
         for (int i = 0; i < 3; i++) 
         {
-            CleanMap();
+            if (mapStyle == 1)
+            {
+                //Debug.Log("Middle Out");
+                CleanMapMiddleOut();
+            }
+            else if (mapStyle == 2)
+            {
+                CleanMapLeftToRight();
+                //Debug.Log("Left To Right");
+            }
+            else if (mapStyle == 3)
+            {
+                CleanMapRightToLeft();
+                //Debug.Log("Right To Left");
+            }
+            else 
+            {
+                CleanMapSidesIn();
+                //Debug.Log("Sides In");
+            }
         }
+        
+        CleanMap();
 
+        // goes through map and creates objects and selects the correct material
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -89,29 +137,157 @@ public class MapGenerator : MonoBehaviour
                 {
                     Vector3 position = new Vector3(this.transform.position.x + x * mapComponentSize,
                         this.transform.position.y + y * mapComponentSize, layer);
-                    Instantiate(mapComponent, position, mapComponent.transform.rotation);
+                    GameObject newObject = Instantiate(mapComponent, position, mapComponent.transform.rotation);
+                    objectGrid[x, y] = newObject;
+                    // if this is one of the top 2 blocks sets color to green
+                    int objectsAbove = CountObjectAbove(x, y);
+                    if (objectsAbove < 2)
+                    {
+                        newObject.GetComponent<Renderer>().material.SetColor("_Color", GREEN);
+                    }
+                    // if this is 2 blocks down sets it to transition green
+                    else if (objectsAbove == 2)
+                    {
+                        newObject.GetComponent<Renderer>().material.SetColor("_Color", DARK_GREEN);
+                    }
+                    // if between 2 and 14 blocks sets it to brown or acccent brown
+                    else if (objectsAbove < 14)
+                    {
+                        if (Random.Range(1, 21) == 1)
+                        {
+                            newObject.GetComponent<Renderer>().material.SetColor("_Color", BROWN);
+                        }
+                        else
+                        {
+                            newObject.GetComponent<Renderer>().material.SetColor("_Color", LIGHT_BROWN);
+                        }
+                    }
+                    // if 14 blocks down sets to transition brown or if more than 14 blocks down and left blocks isnt tranistion brown
+                    else if (objectsAbove == 14 || 
+                        (x > 0 && grid[x - 1, y] == 1
+                        && objectsAbove > 14 && objectGrid[x - 1, y].GetComponent<Renderer>().material.color.Equals(LIGHT_BROWN)))
+                    {
+                        newObject.GetComponent<Renderer>().material.SetColor("_Color", DARK_BROWN);
+                    }
+                    else
+                    {
+                        newObject.GetComponent<Renderer>().material.SetColor("_Color", DARKEST_BROWN);
+                    }
+                    if (y < 2)
+                    {
+                        newObject.GetComponent<Renderer>().material.SetColor("_Color", DARKEST_BROWN);
+                    }
+                    if (y > 0 && grid[x, y - 1] == 1 && objectGrid[x, y - 1].GetComponent<Renderer>().material.color.Equals(DARKEST_BROWN) 
+                        && !objectGrid[x, y].GetComponent<Renderer>().material.color.Equals(DARKEST_BROWN)) 
+                    {
+                        objectGrid[x, y].GetComponent<Renderer>().material.SetColor("_Color", DARK_BROWN);
+                    }
+                }
+            }
+        }
+    }
+    void CleanMapMiddleOut() 
+    {
+        for (int x = 0; x < width / 2; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int surroundingComponentesLeft = CountSurroundingComponents((width / 2) - x, y);
+                int surroundingComponentesRight = CountSurroundingComponents((width / 2) + x, y);
+                
+                // checks the left side 
+                if (surroundingComponentesLeft >= 4)
+                {
+                    grid[(width / 2) - x, y] = 1;
+                } 
+                else if (surroundingComponentesLeft < 4)
+                {
+                    grid[(width / 2) - x, y] = 0;
+                }
+
+                // checks the right side
+                if (surroundingComponentesRight >= 4)
+                {
+                    grid[(width / 2) + x, y] = 1;
+                }
+                else if (surroundingComponentesRight < 4)
+                {
+                   grid[(width / 2) + x, y] = 0;
                 }
             }
         }
     }
 
-    void CleanMap() 
+    void CleanMapSidesIn()
+    {
+        for (int x = 0; x < width / 2; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int surroundingComponentesLeft = CountSurroundingComponents(x, y);
+                int surroundingComponentesRight = CountSurroundingComponents((width - 1 - x), y);
+
+                // checks the left side 
+                if (surroundingComponentesLeft >= 4)
+                {
+                    grid[x, y] = 1;
+                }
+                else if (surroundingComponentesLeft < 4)
+                {
+                    grid[x, y] = 0;
+                }
+
+                // checks the right side
+                if (surroundingComponentesRight >= 4)
+                {
+                    grid[(width - 1 - x), y] = 1;
+                }
+                else if (surroundingComponentesRight < 4)
+                {
+                    grid[(width - 1 - x), y] = 0;
+                }
+            }
+        }
+    }
+
+    void CleanMapLeftToRight()
     {
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 int surroundingComponentes = CountSurroundingComponents(x, y);
-                
+
+                // checks the left side 
                 if (surroundingComponentes >= 4)
                 {
                     grid[x, y] = 1;
-                } 
+                }
                 else if (surroundingComponentes < 4)
                 {
                     grid[x, y] = 0;
                 }
-                
+            }
+        }
+    }
+
+    void CleanMapRightToLeft()
+    {
+        for (int x = (width - 1); x >= 0; x--)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int surroundingComponentes = CountSurroundingComponents(x, y);
+
+                // checks the left side 
+                if (surroundingComponentes >= 4)
+                {
+                    grid[x, y] = 1;
+                }
+                else if (surroundingComponentes < 4)
+                {
+                    grid[x, y] = 0;
+                }
             }
         }
     }
@@ -134,6 +310,43 @@ public class MapGenerator : MonoBehaviour
         }
 
         return count;
+    }
 
+    void CleanMap()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                int surroundingComponentes = CountSurroundingComponents(x, y);
+
+                // checks the left side 
+                if (surroundingComponentes > 4)
+                {
+                    grid[x, y] = 1;
+                }
+                else if (surroundingComponentes < 4)
+                {
+                    grid[x, y] = 0;
+                }
+            }
+        }
+    }
+
+    int CountObjectAbove(int x, int y)
+    {
+        int count = 0;
+        while ((count + y) < (height - 1))
+        {
+            if (grid[x, y + count + 1] == 1)
+            {
+                count += 1;
+            }
+            else
+            {
+                return count;
+            }
+        }
+        return count;
     }
 }
