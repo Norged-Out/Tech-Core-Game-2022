@@ -22,9 +22,11 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 jumpDirection = Vector3.up;
     private Vector3 moveDirection = Vector3.right;
-
+    
     private Rigidbody playerRb;
     public float jumpForce = 10;
+    public int maxJumps = 2;
+    private int jumps;
     public float gravityModifier = 1;
     private bool isOnGround = true;
 
@@ -53,24 +55,47 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         if (canMove)
         {
-            transform.Translate(horizontalInput * speed * Time.deltaTime * moveDirection);
+            // Calculate vector in direction of intended movement
+            Vector3 movement = horizontalInput * moveDirection;
+
+            // When the player is moving, rotate to face the direction of movement
+            if (movement != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(movement);
+            }
+            // Move the player
+            transform.Translate(movement * speed * Time.deltaTime, Space.World);
         }
         
         // Jump with space key
         // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && canMove)
+        if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isOnGround = false;
+            Jump();    
         }
 
         // Launch a projectile from the player on left click
         if (Input.GetMouseButtonDown(0) && canAttack)
         {
-            Instantiate(projectilePrefab, transform.position + projectileOffset, projectilePrefab.transform.rotation);
+            Instantiate(projectilePrefab, transform.position + projectileOffset, transform.rotation); //projectilePrefab.transform.rotation);
         }
     }
-    
+
+    // Method to control the double jump mechanic
+    private void Jump()
+    {
+        if (jumps > 0)
+        {
+            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isOnGround = false;
+            jumps = jumps - 1;
+        }
+        if (jumps == 0)
+        {
+            return;
+        }
+    }
+
     // Determine if the player has collided with an object, such as the ground.
     // NOTE: Make sure the player has a Collider component of some kind, and
     // that the ground is tagged as "Ground"
@@ -78,6 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            jumps = maxJumps;
             isOnGround = true;
         }
     }
