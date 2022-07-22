@@ -10,10 +10,13 @@ using UnityEngine;
  *            float mapComponentSize: Stores the size of the map component.
  *            int width: Stores the width of the map this is measured in the number of mapComponents you wish the map to be made out off
  *            int height: Stores the height of the mpa this is measured in the number of mapComponents you wish the map to be made out off
- *            float layer: Stores the z axis of the object to ensure it is infront of all other objects
  *            float baseHeight: Stores a decimal representation of what percentage of the bottom of the map should be filled in
  *            int[,] grid: This varable holds a grids of 0,1 of the size width x height a zero represents an empty space and a 1 represents 
  *                         a map component in a given location.
+ *            GameObject[,] objectGrid: This variable stores a 2d grid containing all object that make up the generated map
+ *            bool useSeed: indicates whether the map generation will use a specified seed or a random one
+ *            int seed: used as seed for map generation
+ *            System.Random rand: used to generate all random values in the program
  */
 
 
@@ -28,9 +31,6 @@ public class MapGenerator : MonoBehaviour
     // Stores the range of this map
     public int width = 0;
     public int height = 0;
-
-    // stores layer the object is on
-    public float layer;
 
     // stores a decimal of what percent of the bottom of the map will be filled in
     public float baseHeight = .125f;
@@ -102,7 +102,7 @@ public class MapGenerator : MonoBehaviour
 
         // cleans up map in different ways
         int mapStyle = rand.Next(1, 5);
-        for (int i = 0; i < 3; i++) 
+        for (int i = 0; i < 4; i++) 
         {
             if (mapStyle == 1)
             {
@@ -135,8 +135,8 @@ public class MapGenerator : MonoBehaviour
             {
                 if (grid[x, y] == 1)
                 {
-                    Vector3 position = new Vector3(this.transform.position.x + x * mapComponentSize,
-                        this.transform.position.y + y * mapComponentSize, layer);
+                    Vector3 position = new Vector2(this.transform.position.x + x * mapComponentSize,
+                        this.transform.position.y + y * mapComponentSize);
                     GameObject newObject = Instantiate(mapComponent, position, mapComponent.transform.rotation);
                     objectGrid[x, y] = newObject;
                     // if this is one of the top 2 blocks sets color to green
