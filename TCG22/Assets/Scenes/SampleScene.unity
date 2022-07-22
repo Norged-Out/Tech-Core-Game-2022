@@ -1066,9 +1066,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapComponent: {fileID: 5835016340870235104, guid: 71b6fade7695b354184c7d378a6c7153, type: 3}
   mapComponentSize: 0.1
-  width: 220
+  width: 230
   height: 40
-  layer: -1
   baseHeight: 0.01
   useSeed: 0
   seed: 0
