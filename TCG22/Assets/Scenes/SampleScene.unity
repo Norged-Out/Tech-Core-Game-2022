@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapComponent: {fileID: 5835016340870235104, guid: 71b6fade7695b354184c7d378a6c7153, type: 3}
   mapComponentSize: 0.1
-  width: 231
+  width: 241
   height: 40
   baseHeight: 0.01
   useSeed: 0
@@ -1603,11 +1603,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2906534157812164781, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.53
+      value: -12.02
       objectReference: {fileID: 0}
     - target: {fileID: 2906534157812164781, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.03
+      value: -4.92
       objectReference: {fileID: 0}
     - target: {fileID: 2906534157812164781, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}
       propertyPath: m_LocalPosition.z
