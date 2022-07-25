@@ -18,6 +18,9 @@ public class Destructible : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(this.gameObject);
+        if (collision.CompareTag("Projectile")) 
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
