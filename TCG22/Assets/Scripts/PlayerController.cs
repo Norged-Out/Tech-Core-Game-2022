@@ -26,14 +26,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRb; 
     public float jumpForce = 10;
     public int maxJumps = 2;
-    public int jumps;
+    private int jumps;
     public float gravityModifier = 1;
-    public bool isOnGround = true;
+    private bool isOnGround = true;
 
     private bool canMove;
     private int movementTime = 10; // time in seconds; default 10
 
-    private bool canAttack;
+    public bool canAttack;
     private int attackTime = 30; // time in seconds; default 30 
     private Vector3 projectileOffset = Vector3.up * 2; 
     public float launchPower = 10;
