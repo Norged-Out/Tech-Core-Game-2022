@@ -20,32 +20,32 @@ public class PlayerController : MonoBehaviour
     public float speed = 20.0f;
     private float horizontalInput;
 
-    private Vector3 jumpDirection = Vector3.up;
-    private Vector3 moveDirection = Vector3.right;
+    private Vector2 jumpDirection = Vector2.up; 
+    private Vector2 moveDirection = Vector2.right; 
     
-    private Rigidbody playerRb;
+    private Rigidbody2D playerRb; 
     public float jumpForce = 10;
     public int maxJumps = 2;
-    private int jumps;
+    public int jumps;
     public float gravityModifier = 1;
-    private bool isOnGround = true;
+    public bool isOnGround = true;
 
     private bool canMove;
     private int movementTime = 10; // time in seconds; default 10
 
     private bool canAttack;
     private int attackTime = 30; // time in seconds; default 30 
-    private Vector3 projectileOffset = Vector3.up * 2;
+    private Vector3 projectileOffset = Vector3.up * 2; 
     public float launchPower = 10;
-    public Vector3 launchVelocityVector;
-    public Vector3 launchPositionVector;
+    public Vector2 launchVelocityVector; 
+    public Vector2 launchPositionVector; 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        playerRb = GetComponent<Rigidbody>();
-        Physics.gravity *= gravityModifier;
+        playerRb = GetComponent<Rigidbody2D>(); 
+        Physics.gravity *= gravityModifier; 
 
         canMove = true;
         canAttack = false;
@@ -60,12 +60,20 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             // Calculate vector in direction of intended movement
-            Vector3 movement = horizontalInput * moveDirection;
+            Vector2 movement = horizontalInput * moveDirection; 
 
             // When the player is moving, rotate to face the direction of movement
-            if (movement != Vector3.zero)
+            if (movement != Vector2.zero) 
             {
-                transform.rotation = Quaternion.LookRotation(movement);
+                if (horizontalInput < 0)
+                {
+
+                    transform.rotation.Set(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
+                }
+                else 
+                {
+                    transform.rotation.Set(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
+                }
             }
             // Move the player
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
@@ -75,6 +83,7 @@ public class PlayerController : MonoBehaviour
         // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
         if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
+         
             Jump();    
         }
 
@@ -84,8 +93,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && canAttack)
         {
             GameObject projectile = Instantiate(projectilePrefab, launchPositionVector, transform.rotation);
-            projectile.GetComponent<Rigidbody>().velocity = launchVelocityVector;
-            projectile.GetComponent<Rigidbody>().angularVelocity = transform.right * launchPower;
+            projectile.GetComponent<Rigidbody2D>().velocity = launchVelocityVector; 
+            projectile.GetComponent<Rigidbody>().angularVelocity = transform.right * launchPower; 
         }
     }
 
@@ -94,7 +103,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumps > 0)
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); 
             isOnGround = false;
             jumps = jumps - 1;
         }
@@ -107,7 +116,7 @@ public class PlayerController : MonoBehaviour
     // Determine if the player has collided with an object, such as the ground.
     // NOTE: Make sure the player has a Collider component of some kind, and
     // that the ground is tagged as "Ground"
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
