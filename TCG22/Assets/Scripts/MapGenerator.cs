@@ -45,13 +45,13 @@ public class MapGenerator : MonoBehaviour
     public int seed = 0;
     private System.Random rand;
 
-    // colors of object in game
-    private Color32 GREEN = new Color32(153, 230, 79, 255);
-    private Color32 DARK_GREEN = new Color32(104, 185, 60, 255);
-    private Color32 BROWN = new Color32(138, 84, 54, 255);
-    private Color32 LIGHT_BROWN = new Color32(151, 84, 50, 255);
-    private Color32 DARK_BROWN = new Color32(117, 64, 59, 255);
-    private Color32 DARKEST_BROWN = new Color32(100, 59, 48, 255);
+    // colors of object in game // 84 105 227
+    private Color32 GREEN = new Color32(153, 250, 129, 255); // 153, 230, 79, 255
+    private Color32 DARK_GREEN = new Color32(104, 205, 110, 255); // 104, 185, 60, 255
+    private Color32 BROWN = new Color32(138, 104, 104, 255); // 138, 84, 54, 255
+    private Color32 LIGHT_BROWN = new Color32(151, 104, 100, 255); // 151, 84, 50, 255
+    private Color32 DARK_BROWN = new Color32(117, 84, 109, 255); // 117, 64, 59, 255
+    private Color32 DARKEST_BROWN = new Color32(100, 79, 98, 255); // 100, 59, 48, 255
 
     // Start is called before the first frame update
     void Start()
@@ -151,7 +151,7 @@ public class MapGenerator : MonoBehaviour
                         newObject.GetComponent<Renderer>().material.SetColor("_Color", DARK_GREEN);
                     }
                     // if between 2 and 14 blocks sets it to brown or acccent brown
-                    else if (objectsAbove < 14)
+                    else if (objectsAbove < 13)
                     {
                         if (Random.Range(1, 21) == 1)
                         {
@@ -163,9 +163,9 @@ public class MapGenerator : MonoBehaviour
                         }
                     }
                     // if 14 blocks down sets to transition brown or if more than 14 blocks down and left blocks isnt tranistion brown
-                    else if (objectsAbove == 14 || 
+                    else if (objectsAbove == 13 || 
                         (x > 0 && grid[x - 1, y] == 1
-                        && objectsAbove > 14 && objectGrid[x - 1, y].GetComponent<Renderer>().material.color.Equals(LIGHT_BROWN)))
+                        && objectsAbove > 13 && objectGrid[x - 1, y].GetComponent<Renderer>().material.color.Equals(LIGHT_BROWN)))
                     {
                         newObject.GetComponent<Renderer>().material.SetColor("_Color", DARK_BROWN);
                     }
