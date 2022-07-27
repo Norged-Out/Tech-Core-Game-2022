@@ -15,7 +15,7 @@ public class PauseMenu : MenuEssentials
 
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel") && DeathMenu.hasLost != true && WinMenu.hasWon != true)
+        if (Input.GetButtonDown("Cancel")) // && DeathMenu.hasLost != true && WinMenu.hasWon != true)
         {
             if (isPaused) Resume();
             else Pause();
