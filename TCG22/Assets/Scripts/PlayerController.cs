@@ -15,39 +15,35 @@ using UnityEngine;
  */
 public class PlayerController : MonoBehaviour
 {
-    public GameObject projectilePrefab;
+    private GameObject Weapon;
     public Camera playerCamera;
     public Camera overviewCamera;
-
     public float speed = 20.0f;
     private float horizontalInput;
-
-    private Vector2 jumpDirection = Vector2.up; 
-    private Vector2 moveDirection = Vector2.right; 
-    
-    private Rigidbody2D playerRb; 
+    private Vector2 jumpDirection = Vector2.up;
+    private Vector2 moveDirection = Vector2.right;
+    private Rigidbody2D playerRb;
     public float jumpForce = 10;
     public int maxJumps = 2;
     private int jumps;
     public float gravityModifier = 1;
     private bool isOnGround = true;
-
     private bool canMove;
+    public bool FacingRight = true;
     private int movementTime = 10; // time in seconds; default 10
-
     public bool canAttack;
+    public bool hasWeapon = false;
     private int attackTime = 30; // time in seconds; default 30 
-    private Vector3 projectileOffset = Vector3.up * 2; 
+    private Vector3 projectileOffset = Vector3.up * 2;
     public float launchPower = 10;
-    public Vector2 launchVelocityVector; 
-    public Vector2 launchPositionVector; 
-
+    public Vector2 launchVelocityVector;
+    public Vector2 launchPositionVector;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerRb = GetComponent<Rigidbody2D>(); 
-        Physics.gravity *= gravityModifier; 
+        playerRb = GetComponent<Rigidbody2D>();
+        Physics.gravity *= gravityModifier;
 
         canMove = true;
         canAttack = false;
@@ -62,29 +58,47 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             // Calculate vector in direction of intended movement
-            Vector2 movement = horizontalInput * moveDirection; 
+            Vector2 movement = horizontalInput * moveDirection;
+
+            // When the player is moving, rotate to face the direction of movement
+            if (movement != Vector2.zero)
+            {
+                if (horizontalInput > 0 && !FacingRight)
+                {
+                    Flip();
+                }
+                else if (horizontalInput < 0 && FacingRight)
+                {
+                    Flip();
+                }
+            }
 
             // Move the player
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
         }
-        
+
         // Jump with space key
         // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
         if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
-         
-            Jump();    
+            Jump();
         }
 
         launchVelocityVector = (transform.forward + transform.up) * launchPower;
         launchPositionVector = transform.position + projectileOffset;
         // Launch a projectile from the player on left click
-        if (Input.GetMouseButtonDown(0) && canAttack)
+
+        if (Input.GetMouseButtonDown(0) && hasWeapon)
         {
-            GameObject projectile = Instantiate(projectilePrefab, launchPositionVector, transform.rotation);
-            projectile.GetComponent<Rigidbody2D>().velocity = launchVelocityVector; 
-            projectile.GetComponent<Rigidbody>().angularVelocity = transform.right * launchPower; 
+            Weapon.GetComponent<PickUpWeapon>().Shoot();
+            print("Shot");
         }
+    }
+
+    private void Flip()
+    {
+        FacingRight = !FacingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 
     // Method to control the double jump mechanic
@@ -92,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumps > 0)
         {
-            playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); 
+            playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isOnGround = false;
             jumps = jumps - 1;
         }
@@ -148,5 +162,17 @@ public class PlayerController : MonoBehaviour
     {
         playerCamera.enabled = true;
         overviewCamera.enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Weapon") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            collision.transform.position = this.gameObject.transform.position;
+            Weapon = GameObject.Find("Weapon Test");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
     }
 }
