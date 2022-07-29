@@ -16,6 +16,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject projectilePrefab;
+    public Camera playerCamera;
+    public Camera overviewCamera;
 
     public float speed = 20.0f;
     private float horizontalInput;
@@ -128,8 +130,10 @@ public class PlayerController : MonoBehaviour
     // Timer to control how long a player can move for
     IEnumerator MovementCountdownRoutine()
     {
+        ShowPlayerView();
         yield return new WaitForSeconds(movementTime);
         canMove = false;
+        ShowOverheadView();
 
         // Need to call the turn timer within move routine to have sequential execution
         StartCoroutine(AttackTurnCountdownRoutine());
@@ -141,5 +145,21 @@ public class PlayerController : MonoBehaviour
         canAttack = true;
         yield return new WaitForSeconds(attackTime);
         canAttack = false;
+    }
+
+    // Call this function to disable player camera,
+    // and enable overview camera.
+    public void ShowOverheadView()
+    {
+        playerCamera.enabled = false;
+        overviewCamera.enabled = true;
+    }
+
+    // Call this function to enable player camera,
+    // and disable overview camera.
+    public void ShowPlayerView()
+    {
+        playerCamera.enabled = true;
+        overviewCamera.enabled = false;
     }
 }

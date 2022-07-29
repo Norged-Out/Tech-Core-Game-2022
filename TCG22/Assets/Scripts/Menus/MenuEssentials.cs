@@ -12,12 +12,12 @@ public class MenuEssentials : MonoBehaviour
         currSceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
-    public void Replay()
+    protected void Replay()
     {
         StartCoroutine(this.LoadLevel(currSceneIndex));
     }
 
-    public void NextLevel()
+    protected void NextLevel()
     {
         StartCoroutine(LoadLevel(currSceneIndex + 1));
     }
@@ -30,7 +30,7 @@ public class MenuEssentials : MonoBehaviour
         SceneManager.LoadScene(levelIndex);
     }
 
-    public void ReturnToStart()
+    protected void ReturnToStart()
     {
         StartCoroutine(LoadLevel(0));
     }
