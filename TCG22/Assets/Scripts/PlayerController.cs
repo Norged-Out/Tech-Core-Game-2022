@@ -64,19 +64,6 @@ public class PlayerController : MonoBehaviour
             // Calculate vector in direction of intended movement
             Vector2 movement = horizontalInput * moveDirection; 
 
-            // When the player is moving, rotate to face the direction of movement
-            if (movement != Vector2.zero) 
-            {
-                if (horizontalInput < 0)
-                {
-
-                    transform.rotation.Set(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
-                }
-                else 
-                {
-                    transform.rotation.Set(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
-                }
-            }
             // Move the player
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
         }
