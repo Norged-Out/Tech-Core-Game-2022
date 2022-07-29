@@ -5,6 +5,9 @@ using UnityEngine;
 public class PickUpWeapon : MonoBehaviour
 {
     public bool held;
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,15 +26,7 @@ public class PickUpWeapon : MonoBehaviour
         }
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Lets Player Pick Up Weapon
-        if (collision.CompareTag("Player") && collision.gameObject.transform.childCount == 0)
-        {
-            this.transform.parent = collision.transform;
-            this.transform.position = collision.gameObject.transform.position;
-            held = true;
-        }
+    public void Shoot(){
+        Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0,0,90));
     }
 }
