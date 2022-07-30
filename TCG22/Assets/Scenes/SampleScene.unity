@@ -755,7 +755,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6392461526782527450, guid: 4bb36c1afe2541545af81e7e4fcb3bd2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.078
+      value: -0.99
       objectReference: {fileID: 0}
     - target: {fileID: 6392461526782527450, guid: 4bb36c1afe2541545af81e7e4fcb3bd2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -848,11 +848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3713893829638560260, guid: e9e6b775918d14e78aedc6a81a85e8ef, type: 3}
       propertyPath: m_Name
-      value: Player_Cyborg_clear
-      objectReference: {fileID: 0}
-    - target: {fileID: 3769240311142257111, guid: e9e6b775918d14e78aedc6a81a85e8ef, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
+      value: Player_Cyborg
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9e6b775918d14e78aedc6a81a85e8ef, type: 3}

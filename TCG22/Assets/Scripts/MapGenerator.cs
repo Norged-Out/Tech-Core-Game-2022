@@ -127,6 +127,7 @@ public class MapGenerator : MonoBehaviour
             else 
             {
                 CleanMapBottomUp();
+                //Debug.Los("Bottom up");
             }
         }
         for (int i = 0; i < 2; i++)
