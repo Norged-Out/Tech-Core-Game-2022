@@ -53,20 +53,5 @@ public class AnimationContoller : MonoBehaviour
                 animator.Play("Jump1");
             }
         }
-       
-
-        // Rotates Player to Face Correct Direction
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-
-            transform.eulerAngles = new Vector3(0, 180f, 0);
-
-
-        }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        }
-
     }
 }

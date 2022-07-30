@@ -169,7 +169,16 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Weapon") && !collision.GetComponent<PickUpWeapon>().held)
         {
             collision.transform.parent = this.transform;
-            collision.transform.position = this.gameObject.transform.position;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
             Weapon = GameObject.Find("Weapon Test");
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
