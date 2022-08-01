@@ -84,7 +84,7 @@ public class MapGenerator : MonoBehaviour
                     grid[x, y] = 1;
                 }
                 // odds of block spawn decrease as y increases
-                else if (rand.Next(1, 101) < height - y)
+                else if (rand.Next(1, 101) < height - (y * .9))
                 {
                     grid[x, y] = 1;
                 }
@@ -101,8 +101,8 @@ public class MapGenerator : MonoBehaviour
         randomFillGrid();
 
         // cleans up map in different ways
-        int mapStyle = rand.Next(1, 5);
-        for (int i = 0; i < 4; i++) 
+        int mapStyle = rand.Next(1, 6);
+        for (int i = 0; i < 3; i++) 
         {
             if (mapStyle == 1)
             {
@@ -119,14 +119,21 @@ public class MapGenerator : MonoBehaviour
                 CleanMapRightToLeft();
                 //Debug.Log("Right To Left");
             }
-            else 
+            else if (mapStyle == 4)
             {
                 CleanMapSidesIn();
                 //Debug.Log("Sides In");
             }
+            else 
+            {
+                CleanMapBottomUp();
+                //Debug.Los("Bottom up");
+            }
         }
-        
-        CleanMap();
+        for (int i = 0; i < 2; i++)
+        {
+            CleanMap();
+        }
 
         // goes through map and creates objects and selects the correct material
         for (int x = 0; x < width; x++)
@@ -186,6 +193,39 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
+
+    void CleanMapBottomUp() 
+    {
+        for (int y = 0; y < height; y++) 
+        {
+            for (int x = 0; x < width / 2; x++)
+            {
+                int surroundingComponentesLeft = CountSurroundingComponents((width / 2) - x, y);
+                int surroundingComponentesRight = CountSurroundingComponents((width / 2) + x, y);
+
+                // checks the left side 
+                if (surroundingComponentesLeft >= 4)
+                {
+                    grid[(width / 2) - x, y] = 1;
+                }
+                else if (surroundingComponentesLeft < 4)
+                {
+                    grid[(width / 2) - x, y] = 0;
+                }
+
+                // checks the right side
+                if (surroundingComponentesRight >= 4)
+                {
+                    grid[(width / 2) + x, y] = 1;
+                }
+                else if (surroundingComponentesRight < 4)
+                {
+                    grid[(width / 2) + x, y] = 0;
+                }
+            }
+        }
+    }
+
     void CleanMapMiddleOut() 
     {
         for (int x = 0; x < width / 2; x++)
@@ -311,6 +351,8 @@ public class MapGenerator : MonoBehaviour
 
         return count;
     }
+
+
 
     void CleanMap()
     {

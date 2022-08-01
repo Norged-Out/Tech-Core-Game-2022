@@ -20,9 +20,9 @@ public class PlayerController : MonoBehaviour
     public Camera overviewCamera;
     public float speed = 20.0f;
     private float horizontalInput;
-    private Vector2 jumpDirection = Vector2.up; 
-    private Vector2 moveDirection = Vector2.right; 
-    private Rigidbody2D playerRb; 
+    private Vector2 jumpDirection = Vector2.up;
+    private Vector2 moveDirection = Vector2.right;
+    private Rigidbody2D playerRb;
     public float jumpForce = 10;
     public int maxJumps = 2;
     private int jumps;
@@ -34,16 +34,16 @@ public class PlayerController : MonoBehaviour
     public bool canAttack;
     public bool hasWeapon = false;
     private int attackTime = 30; // time in seconds; default 30 
-    private Vector3 projectileOffset = Vector3.up * 2; 
+    private Vector3 projectileOffset = Vector3.up * 2;
     public float launchPower = 10;
-    public Vector2 launchVelocityVector; 
+    public Vector2 launchVelocityVector;
     public Vector2 launchPositionVector;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerRb = GetComponent<Rigidbody2D>(); 
-        Physics.gravity *= gravityModifier; 
+        playerRb = GetComponent<Rigidbody2D>();
+        Physics.gravity *= gravityModifier;
 
         canMove = true;
         canAttack = false;
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             // Calculate vector in direction of intended movement
-            Vector2 movement = horizontalInput * moveDirection; 
+            Vector2 movement = horizontalInput * moveDirection;
 
             // When the player is moving, rotate to face the direction of movement
             if (movement != Vector2.zero)
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
                     Flip();
                 }
             }
-            
+
             // Move the player
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
         }
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
         if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
-            Jump();    
+            Jump();
         }
 
         launchVelocityVector = (transform.forward + transform.up) * launchPower;
@@ -95,10 +95,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Flip() 
+    private void Flip()
     {
-        FacingRight =!FacingRight;
-        transform.Rotate(0f,180f,0f);
+        FacingRight = !FacingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 
     // Method to control the double jump mechanic
@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumps > 0)
         {
-            playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); 
+            playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isOnGround = false;
             jumps = jumps - 1;
         }
@@ -169,7 +169,16 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Weapon") && !collision.GetComponent<PickUpWeapon>().held)
         {
             collision.transform.parent = this.transform;
-            collision.transform.position = this.gameObject.transform.position;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
             Weapon = GameObject.Find("Weapon Test");
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
