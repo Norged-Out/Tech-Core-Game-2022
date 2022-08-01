@@ -8,36 +8,42 @@ public class PickUpWeapon : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
 
-    private GameObject cyborgArm;
+    private GameObject arm;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        cyborgArm = this.transform.Find("Cyborg_Arm").gameObject;
-        cyborgArm.GetComponent<SpriteRenderer>().enabled = false;
-        cyborgArm.GetComponent<Animator>().enabled = false;
-
         held = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (held)
+        {
+            if (this.transform.parent.name == "Player_Cyborg")
+            {
+                arm = this.transform.Find("Cyborg_Arm").gameObject;
+            }
+            else if (this.transform.parent.name == "Player_Punk")
+            {
+                arm = this.transform.Find("Punk_Arm").gameObject;
+            }
+            arm.GetComponent<SpriteRenderer>().enabled = true;
+            arm.GetComponent<Animator>().enabled = true;
+        }
+
         if (Input.GetKey(KeyCode.F) && held)
         {
+            Debug.Log("1");
             this.transform.parent = null;
             this.transform.position += Vector3.left;
             held = false;
             
-            cyborgArm.GetComponent<SpriteRenderer>().enabled = false;
-            cyborgArm.GetComponent<Animator>().enabled = false;
+            arm.GetComponent<SpriteRenderer>().enabled = false;
+            arm.GetComponent<Animator>().enabled = false;
 
-        }
-        if (held && this.transform.parent.name == "Player_Cyborg")
-        {
-            cyborgArm.GetComponent<SpriteRenderer>().enabled = true;
-            cyborgArm.GetComponent<Animator>().enabled = true;
         }
     }
 
