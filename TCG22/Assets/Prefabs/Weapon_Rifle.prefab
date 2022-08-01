@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 6392461526782527452}
   - component: {fileID: 6392461526782527454}
   m_Layer: 0
-  m_Name: Weapon Test
+  m_Name: Weapon_Rifle
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
