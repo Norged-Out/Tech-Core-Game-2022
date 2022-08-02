@@ -10,14 +10,27 @@ public class WormsAimingSystem : MonoBehaviour
     public float currAngle;
     public SpriteRenderer AimSprite;
     public WormsShooting Shoot;
+    public PlayerController player;
+    void Start(){
+        AimSprite.enabled = false;
+    }
     void Update()
     {
+        if(player.hasWeapon){
+        //Debug.Log(currAngle);
+        //Debug.Log(currPower);
         if(Input.GetMouseButton(1)){
+            AimSprite.enabled = true;
             CalculateAngle();
             CalculatePower();
         }
         else if(Input.GetMouseButtonUp(1)){
             Shoot.FireProjectile((int)currPower);
+            AimSprite.enabled = false;
+            AimSprite.transform.localScale = new Vector2(0.22f, 0.22f);
+            AimSprite.transform.rotation = Quaternion.AngleAxis(0f, Vector3.forward);
+
+        }
         }
     }
 
@@ -33,7 +46,7 @@ public class WormsAimingSystem : MonoBehaviour
     }
     void UpdateAngle(int angle){
         currAngle = angle;
-        if(currAngle > 0){
+        if(currAngle < 0){
             currAngle += 360;
         }
         AimSprite.transform.rotation = Quaternion.AngleAxis(currAngle, Vector3.forward);
@@ -48,6 +61,6 @@ public class WormsAimingSystem : MonoBehaviour
 
     void UpdatePower(float amount){
         currPower = Mathf.Clamp(amount,minPower,maxPower);
-        AimSprite.transform.localScale = new Vector2(currPower / 100, currPower / 100);
+        AimSprite.transform.localScale = new Vector2(currPower / 10, currPower / 10);
     }
 }
