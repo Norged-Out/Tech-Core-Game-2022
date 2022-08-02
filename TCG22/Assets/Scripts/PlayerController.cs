@@ -357,12 +357,14 @@ public class PlayerController : MonoBehaviour
             hasWeapon = true;
         }
 
-        // Detect projectile hit
+        /*
+        // Detect projectile hit - CURRENTLY BROKEN; PLAYER'S OWN PROJECTILE TRIGGERS THIS
         if (collision.CompareTag("Projectile"))
         {
             // NOTE: Change this from a hard-coded number to a field of the projectile for variable damage
             playerHealth -= 5;
 
         }
+        */
     }
 }
