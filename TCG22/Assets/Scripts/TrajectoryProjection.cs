@@ -28,8 +28,8 @@ public class TrajectoryProjection : MonoBehaviour
     {
         lineRenderer.positionCount = (int)numPoints;
         List<Vector3> points = new List<Vector3>();
-        Vector3 startingPosition = playerController.launchPositionVector;
-        Vector3 startingVelocity = playerController.launchVelocityVector;
+        Vector3 startingPosition = Vector3.up; //playerController.launchPositionVector;
+        Vector3 startingVelocity = Vector3.up; //playerController.launchVelocityVector;
         for (float t = 0; t < numPoints; t += timeBetweenPoints)
         {
             Vector3 newPoint = startingPosition + t * startingVelocity;
