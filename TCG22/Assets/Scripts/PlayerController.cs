@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 jumpDirection = Vector2.up;
     private Vector2 moveDirection = Vector2.right;
     private Rigidbody2D playerRb;
-    public float jumpForce = 10;
+    public float jumpForce = 25;
     public int maxJumps = 2;
     private int jumps;
     public float gravityModifier = 1;
@@ -91,7 +91,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && hasWeapon)
         {
             Weapon.GetComponent<PickUpWeapon>().Shoot();
-            print("Shot");
         }
     }
 
@@ -166,7 +165,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Weapon") && !collision.GetComponent<PickUpWeapon>().held)
+        if (collision.CompareTag("Weapon 1") && !collision.GetComponent<PickUpWeapon>().held)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -179,7 +178,170 @@ public class PlayerController : MonoBehaviour
                 collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
-            Weapon = GameObject.Find("Weapon Test");
+
+            Weapon = GameObject.Find("Weapon 1(Clone)");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 2") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = GameObject.Find("Weapon 2(Clone)");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 3") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = GameObject.Find("Weapon 3(Clone)");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 4") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = GameObject.Find("Weapon 4(Clone)");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 5") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = GameObject.Find("Weapon 5(Clone)");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 6") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = GameObject.Find("Weapon 6(Clone)");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+            else if (collision.CompareTag("Weapon 7") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = GameObject.Find("Weapon 7(Clone)");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 8") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = GameObject.Find("Weapon 8(Clone)");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 9") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = GameObject.Find("Weapon 9(Clone)");
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 10") && !collision.GetComponent<PickUpWeapon>().held)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = GameObject.Find("Weapon 10(Clone)");
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }

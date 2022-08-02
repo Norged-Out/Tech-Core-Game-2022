@@ -24,7 +24,8 @@ public class WormsProjectile : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision){
-        if(!collision.CompareTag("Player") && !collision.CompareTag("Weapon")){
+        if(!collision.CompareTag("Player")){
+            Destroy(collision);
             Explode();
         }
     }

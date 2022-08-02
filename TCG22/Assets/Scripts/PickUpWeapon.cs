@@ -7,9 +7,7 @@ public class PickUpWeapon : MonoBehaviour
     public bool held;
     public Transform firePoint;
     public GameObject bulletPrefab;
-
     private GameObject arm;
-
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +46,6 @@ public class PickUpWeapon : MonoBehaviour
     }
 
     public void Shoot(){
-        Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0,0,90));
+        Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0,0,0));
     }
 }
