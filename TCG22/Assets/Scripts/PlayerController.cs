@@ -4,40 +4,43 @@ using UnityEngine;
 
 /*
  * Script in order to allow the player to move, jump, and shoot.
- * You must apply this script to the player object, and specify the projectile 
- * prefab in the inspector.
- * 
- * At a later point, it'll probably be better to move weapon functionality to a
- * seperate script, then call that script from within this one. For now, I'll use
- * a basic projectile (like prototype 2).
+ * You must apply this script to the player object.
  * 
  * Author: Jamie Taube
  */
 public class PlayerController : MonoBehaviour
 {
     private GameObject Weapon;
+
+    private Rigidbody2D playerRb;
+
     public Camera playerCamera;
     public Camera overviewCamera;
-    public float speed = 20.0f;
-    private float horizontalInput;
-    private Vector2 jumpDirection = Vector2.up;
-    private Vector2 moveDirection = Vector2.right;
-    private Rigidbody2D playerRb;
-    public float jumpForce = 25;
-    public int maxJumps = 2;
-    private int jumps;
-    public float gravityModifier = 1;
-    private bool isOnGround = true;
-    private bool canMove;
+
     public bool FacingRight = true;
-    private int movementTime = 10; // time in seconds; default 10
+    public bool isOnGround = true;
+    public bool canMove;
     public bool canAttack;
     public bool hasWeapon = false;
-    private int attackTime = 30; // time in seconds; default 30 
-    private Vector3 projectileOffset = Vector3.up * 2;
-    public float launchPower = 10;
-    public Vector2 launchVelocityVector;
-    public Vector2 launchPositionVector;
+    public bool isAlive = true;
+
+    public int maxJumps = 2;
+    public int playerHealth = 100;
+    private int jumps;
+    public int movementTime = 10; // time in seconds; default 10
+    public int attackTime = 30; // time in seconds; default 30 
+
+    //public float launchPower = 10;
+    public float jumpForce = 10;
+    public float gravityModifier = 1;
+    public float speed = 20.0f;
+    private float horizontalInput;
+
+    private Vector2 jumpDirection = Vector2.up;
+    private Vector2 moveDirection = Vector2.right;
+    //public Vector2 launchVelocityVector;
+    //public Vector2 launchPositionVector;
+    //private Vector3 projectileOffset = Vector3.up * 2;
 
     // Start is called before the first frame update
     void Start()
@@ -84,16 +87,23 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        launchVelocityVector = (transform.forward + transform.up) * launchPower;
-        launchPositionVector = transform.position + projectileOffset;
+        //launchVelocityVector = (transform.forward + transform.up) * launchPower;
+        //launchPositionVector = transform.position + projectileOffset;
+        
         // Launch a projectile from the player on left click
-
-        if (Input.GetMouseButtonDown(0) && hasWeapon)
+        if (Input.GetMouseButtonDown(0) && hasWeapon && canAttack)
         {
             Weapon.GetComponent<PickUpWeapon>().Shoot();
         }
+
+        // Check if player is still alive
+        if (playerHealth < 0)
+        {
+            isAlive = false;
+        }
     }
 
+    // Method to flip the character sprite
     private void Flip()
     {
         FacingRight = !FacingRight;
@@ -163,6 +173,7 @@ public class PlayerController : MonoBehaviour
         overviewCamera.enabled = false;
     }
 
+    // Method to control collision events
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Weapon 1") && !collision.GetComponent<PickUpWeapon>().held)
@@ -344,6 +355,14 @@ public class PlayerController : MonoBehaviour
             Weapon = GameObject.Find("Weapon 10(Clone)");
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
+        }
+
+        // Detect projectile hit
+        if (collision.CompareTag("Projectile"))
+        {
+            // NOTE: Change this from a hard-coded number to a field of the projectile for variable damage
+            playerHealth -= 5;
+
         }
     }
 }
