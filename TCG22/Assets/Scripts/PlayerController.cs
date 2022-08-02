@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     public int maxJumps = 2;
     public int playerHealth = 100;
     private int jumps;
-    private int movementTime = 10; // time in seconds; default 10
-    private int attackTime = 30; // time in seconds; default 30 
+    public int movementTime = 10; // time in seconds; default 10
+    public int attackTime = 30; // time in seconds; default 30 
 
     //public float launchPower = 10;
     public float jumpForce = 10;

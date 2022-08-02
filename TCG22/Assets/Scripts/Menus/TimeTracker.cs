@@ -8,15 +8,25 @@ public class TimeTracker : MonoBehaviour
 {
     public TextMeshProUGUI moveTimeTracker;
     public TextMeshProUGUI attackTimeTracker;
-    public float timeToMove = 10f;
-    public float timeToAttack = 30f;
+    //public float timeToMove = 10f;
+    //public float timeToAttack = 30f;
+    public GameObject player;
+    private PlayerController controllerData;
     private float _ctMove;
     private float _ctAttack;
 
-    void Awake()
+    /*void Awake()
     {
         _ctMove = timeToMove;
         _ctAttack = timeToAttack;
+    }*/
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        controllerData = player.GetComponent<PlayerController>();
+        _ctMove = controllerData.movementTime;
+        _ctAttack = controllerData.attackTime;
     }
 
     // Update is called once per frame
