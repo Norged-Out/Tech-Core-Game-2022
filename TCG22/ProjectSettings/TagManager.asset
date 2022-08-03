@@ -17,6 +17,7 @@ TagManager:
   - Weapon 8
   - Weapon 9
   - Weapon 10
+  - HealthBar
   layers:
   - Default
   - TransparentFX

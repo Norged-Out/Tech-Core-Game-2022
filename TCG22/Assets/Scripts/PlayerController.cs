@@ -49,10 +49,12 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody2D>();
         Physics.gravity *= gravityModifier;
-        // hpBar = GameObject.Find("HealthSlider");
         canMove = true;
         canAttack = false;
+
+        hpBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
         hpBar.MaxHealth(playerHealth);
+
         StartCoroutine(MovementCountdownRoutine());
     }
 
@@ -106,6 +108,7 @@ public class PlayerController : MonoBehaviour
         if (playerHealth < 0)
         {
             isAlive = false;
+            hpBar.SetHealth(0);
         }
     }
 
