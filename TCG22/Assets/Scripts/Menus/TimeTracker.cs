@@ -12,20 +12,11 @@ public class TimeTracker : MonoBehaviour
     private float _ctMove;
     private float _ctAttack;
 
-    /*void Awake()
-    {
-        _ctMove = timeToMove;
-        _ctAttack = timeToAttack;
-    }*/
-
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         controllerData = player.GetComponent<PlayerController>();
         _ctMove = controllerData.movementTime;
-
-        // Since both are updated at the same time, to be accurate we need to
-        // offset the attack by adding the time to move.
         _ctAttack = controllerData.attackTime + _ctMove;
     }
 
@@ -41,12 +32,10 @@ public class TimeTracker : MonoBehaviour
         if (_ctMove <= 0)
         {
             _ctMove = 0;
-            
             timeTracker.text = "Time left to fire: " + _ctAttack.ToString("0");
             if (_ctAttack <= 5) timeTracker.color = Color.red;
             else timeTracker.color = Color.white;
             if (_ctAttack <= 0) _ctAttack = 0;
         }
-        
     }
 }

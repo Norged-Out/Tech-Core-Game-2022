@@ -28,13 +28,15 @@ public class PlayerController : MonoBehaviour
     public int playerHealth = 100;
     private int jumps;
     public int movementTime = 10; // time in seconds; default 10
-    public int attackTime = 30; // time in seconds; default 30 
+    public int attackTime = 20; // time in seconds; default 20 
 
     //public float launchPower = 10;
     public float jumpForce = 10;
     public float gravityModifier = 1;
     public float speed = 20.0f;
     private float horizontalInput;
+
+    public HealthBar hpBar;
 
     private Vector2 jumpDirection = Vector2.up;
     private Vector2 moveDirection = Vector2.right;
@@ -47,9 +49,10 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody2D>();
         Physics.gravity *= gravityModifier;
-
+        // hpBar = GameObject.Find("HealthSlider");
         canMove = true;
         canAttack = false;
+        hpBar.MaxHealth(playerHealth);
         StartCoroutine(MovementCountdownRoutine());
     }
 
@@ -85,6 +88,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
             Jump();
+            // the two lines below are for testing purposes.
+            playerHealth -= 10;
+            hpBar.SetHealth(playerHealth);
         }
 
         //launchVelocityVector = (transform.forward + transform.up) * launchPower;
