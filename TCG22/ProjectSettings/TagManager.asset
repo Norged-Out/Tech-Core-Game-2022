@@ -6,6 +6,17 @@ TagManager:
   tags:
   - MapComponent
   - Ground
+  - Projectile
+  - Weapon 1
+  - Weapon 2
+  - Weapon 3
+  - Weapon 4
+  - Weapon 5
+  - Weapon 6
+  - Weapon 7
+  - Weapon 8
+  - Weapon 9
+  - Weapon 10
   layers:
   - Default
   - TransparentFX
