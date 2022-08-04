@@ -28,6 +28,10 @@ public class PickUpWeapon : MonoBehaviour
             {
                 arm = this.transform.Find("Punk_Arm").gameObject;
             }
+            else if (this.transform.parent.name == "Player_Biker")
+            {
+                arm = this.transform.Find("Biker_Arm").gameObject;
+            }
             arm.GetComponent<SpriteRenderer>().enabled = true;
             arm.GetComponent<Animator>().enabled = true;
         }

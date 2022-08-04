@@ -29,8 +29,7 @@ public class WormsAimingSystem : MonoBehaviour
             AimSprite.enabled = false;
             AimSprite.transform.localScale = new Vector2(0.22f, 0.22f);
             AimSprite.transform.rotation = Quaternion.AngleAxis(0f, Vector3.forward);
-
-        }
+            }
         }
     }
 

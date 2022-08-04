@@ -11,23 +11,29 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float distance = Vector2.Distance(GameObject.Find("Player_Punk").transform.position, transform.position);
-        //float distance2 = Vector2.Distance(GameObject.Find("Player_Cyborg").transform.position, transform.position);
-        
-        if(distance < 0){
-            if(GameObject.Find("Player_Cyborg").GetComponent<PlayerController>().FacingRight){
-                rbBullet.AddForce(Vector2.right * speed,ForceMode2D.Impulse);
+        if (GameObject.Find("Player_Cyborg") != null && Vector2.Distance(GameObject.Find("Player_Cyborg").transform.position, transform.position) < 1) {
+            if (GameObject.Find("Player_Cyborg").GetComponent<PlayerController>().FacingRight) {
+                rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
             }
-            else{
-                rbBullet.AddForce(Vector2.left * speed,ForceMode2D.Impulse);
+            else {
+                rbBullet.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
             }
         }
-        else{
-            if(GameObject.Find("Player_Punk").GetComponent<PlayerController>().FacingRight){
-                rbBullet.AddForce(Vector2.right * speed,ForceMode2D.Impulse);
+        else if (GameObject.Find("Player_Punk") != null && Vector2.Distance(GameObject.Find("Player_Punk").transform.position, transform.position) < 1)
+        {
+            if (GameObject.Find("Player_Punk").GetComponent<PlayerController>().FacingRight) {
+                rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
             }
-            else{
-                rbBullet.AddForce(Vector2.left * speed,ForceMode2D.Impulse);
+            else {
+                rbBullet.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+            }
+        } else if (GameObject.Find("Player_Biker") != null && Vector2.Distance(GameObject.Find("Player_Biker").transform.position, transform.position) < 1) 
+        {
+            if (GameObject.Find("Player_Biker").GetComponent<PlayerController>().FacingRight) {
+                rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+            }
+            else {
+                rbBullet.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
             }
         }
     }
