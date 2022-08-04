@@ -611,6 +611,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Punk
       objectReference: {fileID: 0}
+    - target: {fileID: 3993310450869380552, guid: 28264d733a7a5a941922274b48519d30, type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3993310450869380552, guid: 28264d733a7a5a941922274b48519d30, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4730922631403756806, guid: 28264d733a7a5a941922274b48519d30, type: 3}
       propertyPath: jumpForce
       value: 4
