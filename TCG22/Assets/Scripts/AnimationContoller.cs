@@ -53,5 +53,10 @@ public class AnimationContoller : MonoBehaviour
                 animator.Play("Jump1");
             }
         }
+
+        if(Time.time >= 10)
+        {
+            animator.Play("Idle1");
+        }
     }
 }

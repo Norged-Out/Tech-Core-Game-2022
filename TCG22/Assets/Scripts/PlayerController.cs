@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
         FacingRight = !FacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
+    
 
     // Method to control the double jump mechanic
     private void Jump()
