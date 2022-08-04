@@ -185,7 +185,7 @@ public class PlayerController : MonoBehaviour
     // Method to control collision events
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Weapon 1") && !collision.GetComponent<PickUpWeapon>().held)
+        if (collision.CompareTag("Weapon 1") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -199,11 +199,11 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 1(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 2") && !collision.GetComponent<PickUpWeapon>().held)
+        else if (collision.CompareTag("Weapon 2") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -217,11 +217,11 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 2(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 3") && !collision.GetComponent<PickUpWeapon>().held)
+        else if (collision.CompareTag("Weapon 3") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -235,11 +235,11 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 3(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 4") && !collision.GetComponent<PickUpWeapon>().held)
+        else if (collision.CompareTag("Weapon 4") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -253,11 +253,11 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 4(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 5") && !collision.GetComponent<PickUpWeapon>().held)
+        else if (collision.CompareTag("Weapon 5") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -271,11 +271,11 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 5(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 6") && !collision.GetComponent<PickUpWeapon>().held)
+        else if (collision.CompareTag("Weapon 6") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -289,11 +289,11 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 6(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-            else if (collision.CompareTag("Weapon 7") && !collision.GetComponent<PickUpWeapon>().held)
+            else if (collision.CompareTag("Weapon 7") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -307,11 +307,11 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 7(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 8") && !collision.GetComponent<PickUpWeapon>().held)
+        else if (collision.CompareTag("Weapon 8") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -325,11 +325,11 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 8(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 9") && !collision.GetComponent<PickUpWeapon>().held)
+        else if (collision.CompareTag("Weapon 9") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -343,11 +343,11 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 9(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 10") && !collision.GetComponent<PickUpWeapon>().held)
+        else if (collision.CompareTag("Weapon 10") && this.transform.childCount == 1)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -361,7 +361,7 @@ public class PlayerController : MonoBehaviour
             }
             collision.transform.rotation = this.gameObject.transform.rotation;
 
-            Weapon = GameObject.Find("Weapon 10(Clone)");
+            Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }

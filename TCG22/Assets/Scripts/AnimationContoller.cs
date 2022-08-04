@@ -44,7 +44,7 @@ public class AnimationContoller : MonoBehaviour
         // Checks if Player is Jumping
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (this.transform.childCount != 0)
+            if (this.transform.childCount > 1)
             {
                 animator.Play("Jump2");
             }
