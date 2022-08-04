@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c995763513d651840bd943ad95157dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weapon1: {fileID: 6392461526782527441, guid: 4bb36c1afe2541545af81e7e4fcb3bd2, type: 3}
+  Weapon1: {fileID: 7072303669982935061, guid: 9c3dd7937df91f34692a2038217ae730, type: 3}
   Weapon2: {fileID: 6392461526782527441, guid: ed5f124d91f370942a2f7492f39da8b3, type: 3}
   Weapon3: {fileID: 6392461526782527441, guid: 88d5a81e021a2d247baa04d41302708f, type: 3}
   Weapon4: {fileID: 6392461526782527441, guid: ed2be06eaee1f0246bcee9e7a844f5c0, type: 3}
