@@ -62,6 +62,20 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MovementCountdownRoutine());
     }
 
+    // Use FixedUpdate for physics engine related events
+    void FixedUpdate()
+    {
+        // Jump with space key
+        // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
+        if (Input.GetKeyDown(KeyCode.Space) && canMove)
+        {
+            Jump();
+            // the two lines below are for testing purposes.
+            playerHealth -= 10;
+            hpBar.SetHealth(playerHealth);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -87,16 +101,6 @@ public class PlayerController : MonoBehaviour
 
             // Move the player
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
-        }
-
-        // Jump with space key
-        // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
-        if (Input.GetKeyDown(KeyCode.Space) && canMove)
-        {
-            Jump();
-            // the two lines below are for testing purposes.
-            playerHealth -= 10;
-            hpBar.SetHealth(playerHealth);
         }
 
         //launchVelocityVector = (transform.forward + transform.up) * launchPower;
@@ -129,6 +133,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumps > 0)
         {
+            Debug.Log("FORCE APPLIED");
             playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isOnGround = false;
             jumps = jumps - 1;
