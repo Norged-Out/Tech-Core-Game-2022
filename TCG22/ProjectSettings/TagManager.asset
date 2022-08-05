@@ -18,6 +18,7 @@ TagManager:
   - Weapon 9
   - Weapon 10
   - HealthBar
+  - TimeTracker
   layers:
   - Default
   - TransparentFX

@@ -7,22 +7,14 @@ using TMPro;
 public class TimeTracker : MonoBehaviour
 {
     public TextMeshProUGUI timeTracker;
-    public GameObject player;
-    private PlayerController controllerData;
+    private string player;
     private float _ctMove;
     private float _ctAttack;
+    private bool timerActive = false;
 
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        controllerData = player.GetComponent<PlayerController>();
-        _ctMove = controllerData.movementTime;
-        _ctAttack = controllerData.attackTime; 
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        if (!timerActive) return;
         if (_ctAttack <= 0) return;
 
         float reduction = 1 * Time.deltaTime;
@@ -30,7 +22,7 @@ public class TimeTracker : MonoBehaviour
         if (_ctMove <= 0)
         {
             _ctAttack -= reduction;
-            timeTracker.text = "Time left to fire: " + _ctAttack.ToString("0");
+            timeTracker.text = "Time left for " +  player + " to fire: " + _ctAttack.ToString("0");
             if (_ctAttack <= 5) timeTracker.color = Color.red;
             else timeTracker.color = Color.white;
            // if (_ctAttack <= 0) _ctAttack = 0;
@@ -38,8 +30,17 @@ public class TimeTracker : MonoBehaviour
         else
         {
             _ctMove -= reduction;
-            timeTracker.text = "Time left to move: " + _ctMove.ToString("0");
+            timeTracker.text = "Time left for " + player + " to move: " + _ctMove.ToString("0");
             if (_ctMove <= 3) timeTracker.color = Color.red;
         }
+    }
+
+
+    public void setTimer(float moveTime, float attackTime, string playerName)
+    {
+        if (!timerActive) timerActive = true;
+        _ctMove = moveTime;
+        _ctAttack = attackTime;
+        player = playerName;
     }
 }

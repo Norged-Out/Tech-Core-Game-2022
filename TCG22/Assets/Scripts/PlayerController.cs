@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
 
     public HealthBar hpBar;
+    public TimeTracker timeTracker;
 
     private Vector2 jumpDirection = Vector2.up;
     private Vector2 moveDirection = Vector2.right;
@@ -54,6 +55,9 @@ public class PlayerController : MonoBehaviour
 
         hpBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
         hpBar.MaxHealth(playerHealth);
+
+        timeTracker = GameObject.FindGameObjectWithTag("TimeTracker").GetComponent<TimeTracker>();
+        timeTracker.setTimer(movementTime, attackTime, gameObject.name);
 
         StartCoroutine(MovementCountdownRoutine());
     }
@@ -133,6 +137,15 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+    }
+
+    public void resetTimer()
+    {
+        StopAllCoroutines();
+        timeTracker.setTimer(movementTime, attackTime, gameObject.name);
+        canMove = true;
+        StartCoroutine(MovementCountdownRoutine());
+
     }
 
     // Determine if the player has collided with an object, such as the ground.
