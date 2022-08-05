@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private int jumps;
     public int movementTime = 10; // time in seconds; default 10
     public int attackTime = 20; // time in seconds; default 20 
+    private int lowerBound = -6;
 
     //public float launchPower = 10;
     public float jumpForce = 10;
@@ -62,6 +63,20 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MovementCountdownRoutine());
     }
 
+    // Use FixedUpdate for physics engine related events
+    void FixedUpdate()
+    {
+        // Jump with space key
+        // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
+        if (Input.GetKeyDown(KeyCode.Space) && canMove)
+        {
+            Jump();
+            // the two lines below are for testing purposes.
+            playerHealth -= 10;
+            hpBar.SetHealth(playerHealth);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -89,16 +104,6 @@ public class PlayerController : MonoBehaviour
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
         }
 
-        // Jump with space key
-        // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
-        if (Input.GetKeyDown(KeyCode.Space) && canMove)
-        {
-            Jump();
-            // the two lines below are for testing purposes.
-            playerHealth -= 10;
-            hpBar.SetHealth(playerHealth);
-        }
-
         //launchVelocityVector = (transform.forward + transform.up) * launchPower;
         //launchPositionVector = transform.position + projectileOffset;
         
@@ -106,6 +111,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && hasWeapon && canAttack)
         {
             Weapon.GetComponent<PickUpWeapon>().Shoot();
+        }
+
+        // Kill player if they fall off the map
+        if (transform.position.y < lowerBound)
+        {
+            playerHealth = 0;
         }
 
         // Check if player is still alive
@@ -129,6 +140,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumps > 0)
         {
+            Debug.Log("FORCE APPLIED");
             playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isOnGround = false;
             jumps = jumps - 1;
