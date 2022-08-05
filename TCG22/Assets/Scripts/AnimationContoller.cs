@@ -8,13 +8,12 @@ public class AnimationContoller : MonoBehaviour
     // Stores Animator For Character
     private Animator animator;
     public bool Direction = false;
+    public float horizontalInput;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-
-
     }
 
     // Update is called once per frame
@@ -53,8 +52,8 @@ public class AnimationContoller : MonoBehaviour
                 animator.Play("Jump1");
             }
         }
-
-        if(Time.time >= 10)
+        // Gets the playerContoller scripts and checks if we are in the attack phase
+        if(transform.GetComponent<PlayerController>().canAttack)
         {
             animator.Play("Idle1");
         }

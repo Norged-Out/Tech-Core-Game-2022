@@ -38,7 +38,6 @@ public class PickUpWeapon : MonoBehaviour
 
         if (Input.GetKey(KeyCode.F) && held)
         {
-            Debug.Log("1");
             this.transform.parent = null;
             this.transform.position += Vector3.left;
             held = false;
