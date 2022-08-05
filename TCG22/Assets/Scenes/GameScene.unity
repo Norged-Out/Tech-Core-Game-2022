@@ -1279,7 +1279,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &660934650
 GameObject:
@@ -1335,7 +1335,7 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 3713893829638560258, guid: e9e6b775918d14e78aedc6a81a85e8ef, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3713893829638560258, guid: e9e6b775918d14e78aedc6a81a85e8ef, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1380,14 +1380,6 @@ PrefabInstance:
     - target: {fileID: 3713893829638560260, guid: e9e6b775918d14e78aedc6a81a85e8ef, type: 3}
       propertyPath: m_Name
       value: Player_Cyborg
-      objectReference: {fileID: 0}
-    - target: {fileID: 3713893829638560260, guid: e9e6b775918d14e78aedc6a81a85e8ef, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8921279589274227439, guid: e9e6b775918d14e78aedc6a81a85e8ef, type: 3}
-      propertyPath: m_SortingOrder
-      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9e6b775918d14e78aedc6a81a85e8ef, type: 3}
@@ -2108,7 +2100,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1351676248 stripped
 GameObject:
@@ -2469,7 +2461,7 @@ Transform:
   - {fileID: 337746991}
   - {fileID: 920445422}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1910550840
 PrefabInstance:
@@ -2792,7 +2784,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2106643638
 GameObject:
@@ -2941,7 +2933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3598765605710767093, guid: e1facb7a0b4201b4ea968a2eabfbda1e, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3598765605710767093, guid: e1facb7a0b4201b4ea968a2eabfbda1e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3007,7 +2999,7 @@ PrefabInstance:
       objectReference: {fileID: 519420031}
     - target: {fileID: 2279829781261975341, guid: b530a82864faf89469c19640f41c823b, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2279829781261975341, guid: b530a82864faf89469c19640f41c823b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3049,17 +3041,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3612206293915801355, guid: b530a82864faf89469c19640f41c823b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 300
-      objectReference: {fileID: 0}
     - target: {fileID: 7526793880961112704, guid: b530a82864faf89469c19640f41c823b, type: 3}
       propertyPath: m_Name
       value: Player_Biker
-      objectReference: {fileID: 0}
-    - target: {fileID: 7526793880961112704, guid: b530a82864faf89469c19640f41c823b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b530a82864faf89469c19640f41c823b, type: 3}

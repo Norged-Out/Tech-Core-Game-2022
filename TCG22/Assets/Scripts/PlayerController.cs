@@ -299,7 +299,6 @@ public class PlayerController : MonoBehaviour
 
             Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
         }
         else if (collision.CompareTag("Weapon 6") && this.transform.childCount == 1)
         {
@@ -317,7 +316,6 @@ public class PlayerController : MonoBehaviour
 
             Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
         }
             else if (collision.CompareTag("Weapon 7") && this.transform.childCount == 1)
         {
@@ -335,7 +333,6 @@ public class PlayerController : MonoBehaviour
 
             Weapon = collision.gameObject;
             Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
         }
         else if (collision.CompareTag("Weapon 8") && this.transform.childCount == 1)
         {

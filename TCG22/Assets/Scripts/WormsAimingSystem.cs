@@ -10,16 +10,20 @@ public class WormsAimingSystem : MonoBehaviour
     public float currAngle;
     public SpriteRenderer AimSprite;
     public WormsShooting Shoot;
-    public PlayerController player;
+    // public PlayerController player;
+    public PickUpWeapon isHeld;
     void Start(){
-        AimSprite.enabled = false;
-        player = this.transform.parent.GetComponent<PlayerController>();
+        // AimSprite.enabled = false;
+        // player = this.transform.parent.GetComponent<PlayerController>();
+        isHeld = this.GetComponent<PickUpWeapon>();
     }
     void Update()
     {
-        if(player.hasWeapon){
-        //Debug.Log(currAngle);
-        //Debug.Log(currPower);
+        if (isHeld.held && this.transform.parent.GetComponent<PlayerController>().canAttack) {
+            //Debug.Log(currAngle);
+            //Debug.Log(currPower);
+            AimSprite = transform.parent.transform.Find("Aim").transform.GetComponent<SpriteRenderer>();
+            
             if(Input.GetMouseButton(1)){
                 AimSprite.enabled = true;
                 CalculateAngle();
