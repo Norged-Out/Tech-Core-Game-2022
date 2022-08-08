@@ -164,13 +164,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2434575543201242426}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ba2f90426bb9f3489c9ee43e1d4f980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
-  overviewCamera: {fileID: 0}
+  playerCamera: {fileID: 6690518485262805881, guid: 157152c5017b33c4599d4916af41aa9e, type: 3}
+  overviewCamera: {fileID: 808841557061548552, guid: a02313b5f1692f94aaea4e0d4144b94c, type: 3}
   FacingRight: 1
   isOnGround: 1
   canMove: 0
