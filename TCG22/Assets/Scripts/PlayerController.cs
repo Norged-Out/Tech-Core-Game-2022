@@ -14,31 +14,31 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D playerRb;
 
+    public TimeTracker timeTracker;
+
     public Camera playerCamera;
     public Camera overviewCamera;
+
+    public PlayerHealth playerHealth;
+    public HealthBar hpBar;
 
     public bool FacingRight = true;
     public bool isOnGround = true;
     public bool canMove;
     public bool canAttack;
     public bool hasWeapon = false;
-    public PlayerHealth playerHealth;
-    public HealthBar hpBar;
 
     public int maxJumps = 2;
-    
     private int jumps;
     public int movementTime = 10; // time in seconds; default 10
     public int attackTime = 20; // time in seconds; default 20 
     private int lowerBound = -6;
 
     //public float launchPower = 10;
-    public float jumpForce = 10;
+    public float jumpForce = 4;
     public float gravityModifier = 1;
-    public float speed = 20.0f;
+    public float speed = 2;
     private float horizontalInput;
-
-    public TimeTracker timeTracker;
 
     private Vector2 jumpDirection = Vector2.up;
     private Vector2 moveDirection = Vector2.right;
