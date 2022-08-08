@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AliveTime: 4
-  ExplosionPrefab: {fileID: 3995128203294167501, guid: ae607f3f9566ee74d9a61f71e1526c2b, type: 3}
+  ExplosionPrefab: {fileID: 2643584262885295707, guid: 3f89cdaa2da6c9446b9209b4469f89dd, type: 3}
 --- !u!61 &-2719936713742926435
 BoxCollider2D:
   m_ObjectHideFlags: 0
