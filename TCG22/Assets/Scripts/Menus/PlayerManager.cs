@@ -16,17 +16,10 @@ public class PlayerManager : MonoBehaviour
     public Camera overviewCamera;
     public Camera playerCamera;
     public TimeTracker timeTracker;
-    private int numTruns;
+    private int numTurns;
 
     private void Awake()
     {
-        /*playerList = GameObject.FindGameObjectsWithTag("Player");
-        playerA = playerList[0];
-        playerB = playerList[1];
-        currPlayer = playerA;
-        playerB.gameObject.SetActive(false);
-        playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);*/
-
         int _paIndex;
         int _pbIndex;
         do
@@ -37,6 +30,8 @@ public class PlayerManager : MonoBehaviour
 
         playerA = Instantiate(playerList[_paIndex]) as GameObject;
         playerB = Instantiate(playerList[_pbIndex]) as GameObject;
+
+
         paController = playerA.GetComponent<PlayerController>();
         pbController = playerB.GetComponent<PlayerController>();
         paController.playerCamera = playerCamera;
@@ -50,7 +45,7 @@ public class PlayerManager : MonoBehaviour
         paController.enabled = true;
         pbController.enabled = false;
         playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
-        numTruns = 1;
+        numTurns = 1;
     }
 
     private void Start()
@@ -64,9 +59,9 @@ public class PlayerManager : MonoBehaviour
     {
         if (!timeTracker.turnActive)            //Input.GetKeyDown(KeyCode.S) && overviewCamera.enabled)
         {
-            if(numTruns < 6)
+            if(numTurns < 6)
             {
-                numTruns++;
+                numTurns++;
                 SwapPlayer();
             }
             else
