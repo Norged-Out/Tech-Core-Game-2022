@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
             Jump();
-            playerHealth.TakeDamage(10);
+            //playerHealth.TakeDamage(10);
         }
     }
 

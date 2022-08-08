@@ -19,6 +19,8 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(float health)
     {
         slider.value = health;
+
+        // When the stamina bar is implemented change this to be a static color
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 }
