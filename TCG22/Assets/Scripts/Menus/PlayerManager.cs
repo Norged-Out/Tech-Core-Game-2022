@@ -9,6 +9,8 @@ public class PlayerManager : MonoBehaviour
     private GameObject playerB;
     private PlayerController paController;
     private PlayerController pbController;
+    private AnimationContoller paAnimator;
+    private AnimationContoller pbAnimator;
     public HealthBar hpA;
     public HealthBar hpB;
     public Camera overviewCamera;
@@ -41,14 +43,21 @@ public class PlayerManager : MonoBehaviour
         paController.overviewCamera = overviewCamera;
         pbController.playerCamera = playerCamera;
         pbController.overviewCamera = overviewCamera;
-        playerA.name = "Player A";
-        playerB.name = "Player B";
         paController.hpBar = hpA;
         pbController.hpBar = hpB;
+        playerA.name = "Player A";
+        playerB.name = "Player B";
         paController.enabled = true;
         pbController.enabled = false;
         playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
         numTruns = 1;
+    }
+
+    private void Start()
+    {
+        paAnimator = playerA.GetComponent<AnimationContoller>();
+        pbAnimator = playerB.GetComponent<AnimationContoller>();
+        pbAnimator.enabled = false;
     }
 
     private void Update()
@@ -73,6 +82,8 @@ public class PlayerManager : MonoBehaviour
         {
             pbController.enabled = true;
             paController.enabled = false;
+            pbAnimator.enabled = true;
+            paAnimator.enabled = false;
             playerCamera.GetComponent<FollowPlayer>().setPlayer(playerB);
             pbController.resetTimer();
         }
@@ -80,6 +91,8 @@ public class PlayerManager : MonoBehaviour
         {
             paController.enabled = true;
             pbController.enabled = false;
+            paAnimator.enabled = true;
+            pbAnimator.enabled = false;
             playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
             paController.resetTimer();
         }

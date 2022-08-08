@@ -22,10 +22,11 @@ public class PlayerController : MonoBehaviour
     public bool canMove;
     public bool canAttack;
     public bool hasWeapon = false;
-    public bool isAlive = true;
+    public PlayerHealth playerHealth;
+    public HealthBar hpBar;
 
     public int maxJumps = 2;
-    public int playerHealth = 100;
+    
     private int jumps;
     public int movementTime = 10; // time in seconds; default 10
     public int attackTime = 20; // time in seconds; default 20 
@@ -37,7 +38,6 @@ public class PlayerController : MonoBehaviour
     public float speed = 20.0f;
     private float horizontalInput;
 
-    public HealthBar hpBar;
     public TimeTracker timeTracker;
 
     private Vector2 jumpDirection = Vector2.up;
@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
         canAttack = false;
 
         //hpBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
-        hpBar.MaxHealth(playerHealth);
+        playerHealth = gameObject.GetComponent<PlayerHealth>();
+        playerHealth.setHPBar(hpBar);
 
         timeTracker = GameObject.FindGameObjectWithTag("TimeTracker").GetComponent<TimeTracker>();
         timeTracker.setTimer(movementTime, attackTime, gameObject.name);
@@ -71,9 +72,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
             Jump();
-            // the two lines below are for testing purposes.
-            playerHealth -= 10;
-            hpBar.SetHealth(playerHealth);
+            playerHealth.TakeDamage(10);
         }
     }
 
@@ -116,14 +115,7 @@ public class PlayerController : MonoBehaviour
         // Kill player if they fall off the map
         if (transform.position.y < lowerBound)
         {
-            playerHealth = 0;
-        }
-
-        // Check if player is still alive
-        if (playerHealth < 0)
-        {
-            isAlive = false;
-            hpBar.SetHealth(0);
+            playerHealth.Death();
         }
     }
 

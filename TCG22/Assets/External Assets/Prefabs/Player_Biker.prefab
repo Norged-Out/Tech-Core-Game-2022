@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9170624944576605741}
   - component: {fileID: 583866753721113276}
   - component: {fileID: 7878588774490933623}
+  - component: {fileID: 4767677455986624047}
   m_Layer: 0
   m_Name: Player_Biker
   m_TagString: Player
@@ -176,15 +177,13 @@ MonoBehaviour:
   canMove: 0
   canAttack: 0
   hasWeapon: 0
-  isAlive: 1
+  playerHealth: {fileID: 0}
   maxJumps: 2
-  playerHealth: 100
   movementTime: 10
   attackTime: 20
   jumpForce: 4
   gravityModifier: 1
   speed: 2
-  hpBar: {fileID: 0}
   timeTracker: {fileID: 0}
 --- !u!114 &7878588774490933623
 MonoBehaviour:
@@ -200,6 +199,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Direction: 0
   horizontalInput: 0
+--- !u!114 &4767677455986624047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7526793880961112704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ba4793d8cd8004899612e36979278e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar: {fileID: 0}
+  isAlive: 1
 --- !u!1 &7842094656454380208
 GameObject:
   m_ObjectHideFlags: 0
