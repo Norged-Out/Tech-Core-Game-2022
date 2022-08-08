@@ -9,12 +9,14 @@ public class PlayerManager : MonoBehaviour
     private GameObject playerB;
     private PlayerController paController;
     private PlayerController pbController;
+    public HealthBar hpA;
+    public HealthBar hpB;
     public Camera overviewCamera;
     public Camera playerCamera;
     public TimeTracker timeTracker;
     private int numTruns;
 
-    private void Start()
+    private void Awake()
     {
         /*playerList = GameObject.FindGameObjectsWithTag("Player");
         playerA = playerList[0];
@@ -41,6 +43,8 @@ public class PlayerManager : MonoBehaviour
         pbController.overviewCamera = overviewCamera;
         playerA.name = "Player A";
         playerB.name = "Player B";
+        paController.hpBar = hpA;
+        pbController.hpBar = hpB;
         paController.enabled = true;
         pbController.enabled = false;
         playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);

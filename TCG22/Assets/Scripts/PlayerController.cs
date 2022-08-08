@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         canMove = true;
         canAttack = false;
 
-        hpBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
+        //hpBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
         hpBar.MaxHealth(playerHealth);
 
         timeTracker = GameObject.FindGameObjectWithTag("TimeTracker").GetComponent<TimeTracker>();
