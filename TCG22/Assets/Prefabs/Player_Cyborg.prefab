@@ -192,10 +192,11 @@ MonoBehaviour:
   canAttack: 0
   hasWeapon: 0
   playerHealth: {fileID: 0}
+  hpBar: {fileID: 0}
   maxJumps: 2
   movementTime: 10
   attackTime: 20
-  jumpForce: 2
+  jumpForce: 4
   gravityModifier: 1
   speed: 2
   timeTracker: {fileID: 0}
@@ -211,7 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36ba4793d8cd8004899612e36979278e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 0}
   isAlive: 1
 --- !u!1 &8415347117620332212
 GameObject:
