@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class PickUpWeapon : MonoBehaviour
 {
-    public bool held;
+    public bool held = false;
     public Transform firePoint;
     public GameObject bulletPrefab;
     private GameObject arm;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        held = false;
+    void Update(){
+        
     }
-
-    // Update is called once per frame
-    void Update()
+    void PostUpdate()
     {
         if (held)
         {
@@ -34,17 +29,16 @@ public class PickUpWeapon : MonoBehaviour
             }
             arm.GetComponent<SpriteRenderer>().enabled = true;
             arm.GetComponent<Animator>().enabled = true;
-        }
 
-        if (Input.GetKey(KeyCode.F) && held)
-        {
+            if (Input.GetKey(KeyCode.F))
+            {
+            arm.GetComponent<SpriteRenderer>().enabled = false;
+            arm.GetComponent<Animator>().enabled = false;
             this.transform.parent = null;
             this.transform.position += Vector3.left;
             held = false;
-            
-            arm.GetComponent<SpriteRenderer>().enabled = false;
-            arm.GetComponent<Animator>().enabled = false;
-
+            Debug.Log("Dropping");
+            }
         }
     }
 
