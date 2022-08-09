@@ -8,22 +8,23 @@ public class PickUpWeapon : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     private GameObject arm;
-    void Update(){
-        
-    }
-    void PostUpdate()
+   
+    void Update()
     {
         if (held)
         {
-            if (this.transform.parent.name == "Player_Cyborg")
+            Debug.Log(this.transform.parent.Find("Player_Cyborg") != null);
+            Debug.Log(this.transform.parent.Find("Player_Punk") != null);
+            Debug.Log(this.transform.parent.Find("Player_Biker") != null);
+            if (this.transform.parent.Find("Player_Cyborg") !=  null)
             {
                 arm = this.transform.Find("Cyborg_Arm").gameObject;
             }
-            else if (this.transform.parent.name == "Player_Punk")
+            else if (this.transform.parent.Find("Player_Punk") != null)
             {
                 arm = this.transform.Find("Punk_Arm").gameObject;
             }
-            else if (this.transform.parent.name == "Player_Biker")
+            else if (this.transform.parent.Find("Player_Biker") != null)
             {
                 arm = this.transform.Find("Biker_Arm").gameObject;
             }

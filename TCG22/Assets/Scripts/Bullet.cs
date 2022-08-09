@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     {
         
         if (GameObject.Find("Player_Cyborg") != null && Vector2.Distance(GameObject.Find("Player_Cyborg").transform.position, transform.position) < 1) {
-            if (GameObject.Find("Player_Cyborg").GetComponent<PlayerController>().FacingRight) {
+            if (GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().FacingRight) {
                 rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
             }
             else {
@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         }
         else if (GameObject.Find("Player_Punk") != null && Vector2.Distance(GameObject.Find("Player_Punk").transform.position, transform.position) < 1)
         {
-            if (GameObject.Find("Player_Punk").GetComponent<PlayerController>().FacingRight) {
+            if (GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().FacingRight) {
                 rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
             }
             else {
@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
             }
         } else if (GameObject.Find("Player_Biker") != null && Vector2.Distance(GameObject.Find("Player_Biker").transform.position, transform.position) < 1) 
         {
-            if (GameObject.Find("Player_Biker").GetComponent<PlayerController>().FacingRight) {
+            if (GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().FacingRight) {
                 rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
             }
             else {

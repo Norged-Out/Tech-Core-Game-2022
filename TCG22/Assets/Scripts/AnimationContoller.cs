@@ -20,7 +20,7 @@ public class AnimationContoller : MonoBehaviour
     void Update()
     {
         // Checks if player has a weapon
-        if (this.transform.childCount > 1)
+        if (this.transform.childCount > 2)
         {
             animator.SetBool("hasWeapon", true);
         }
@@ -43,7 +43,7 @@ public class AnimationContoller : MonoBehaviour
         // Checks if Player is Jumping
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (this.transform.childCount > 1)
+            if (this.transform.childCount > 2)
             {
                 animator.Play("Jump2");
             }
