@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public bool isAlive = true;
 
     public int maxJumps = 2;
-    public int playerHealth = 100;
+    public static int playerHealth = 100;
     private int jumps;
     public int movementTime = 10; // time in seconds; default 10
     public int attackTime = 20; // time in seconds; default 20 
@@ -147,6 +147,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MovementCountdownRoutine());
 
     }
+
 
     // Determine if the player has collided with an object, such as the ground.
     // NOTE: Make sure the player has a Collider component of some kind, and
