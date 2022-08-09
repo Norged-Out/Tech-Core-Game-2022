@@ -169,6 +169,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Reset the timers and player state to start a new turn
     public void resetTimer()
     {
         StopAllCoroutines();
@@ -406,15 +407,5 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-
-        /*
-        // Detect projectile hit - CURRENTLY BROKEN; PLAYER'S OWN PROJECTILE TRIGGERS THIS
-        if (collision.CompareTag("Projectile"))
-        {
-            // NOTE: Change this from a hard-coded number to a field of the projectile for variable damage
-            playerHealth -= 5;
-
-        }
-        */
     }
 }
