@@ -9,30 +9,37 @@ public class Bullet : MonoBehaviour
     public GameObject Explosion;
     void Start()
     {
-        
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = Camera.main.nearClipPlane + 1;
+
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
         if (GameObject.Find("Player_Cyborg") != null && Vector2.Distance(GameObject.Find("Player_Cyborg").transform.position, transform.position) < 1) {
+            Vector2 angle = mousePosition - GameObject.Find("Player_Cyborg").transform.parent.transform.position;
             if (GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().FacingRight) {
-                rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
             else {
-                rbBullet.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         }
         else if (GameObject.Find("Player_Punk") != null && Vector2.Distance(GameObject.Find("Player_Punk").transform.position, transform.position) < 1)
         {
+            Vector2 angle = mousePosition - GameObject.Find("Player_Punk").transform.parent.transform.position;
             if (GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().FacingRight) {
-                rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
             else {
-                rbBullet.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         } else if (GameObject.Find("Player_Biker") != null && Vector2.Distance(GameObject.Find("Player_Biker").transform.position, transform.position) < 1) 
         {
+            Vector2 angle = mousePosition - GameObject.Find("Player_Biker").transform.parent.transform.position;
             if (GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().FacingRight) {
-                rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+                rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
             else {
-                rbBullet.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
+                rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         }
         else{
