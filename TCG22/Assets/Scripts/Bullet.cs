@@ -11,15 +11,23 @@ public class Bullet : MonoBehaviour
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = Camera.main.nearClipPlane + 1;
-
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
         if (GameObject.Find("Player_Cyborg") != null && Vector2.Distance(GameObject.Find("Player_Cyborg").transform.position, transform.position) < 1) {
             Vector2 angle = mousePosition - GameObject.Find("Player_Cyborg").transform.parent.transform.position;
             if (GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().FacingRight) {
+                if (angle.x < 0)
+                {
+                    GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().Flip();
+                }
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
-            else {
+            else 
+            {
+                if (angle.x > 0)
+                {
+                    GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().Flip();
+                }
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         }
@@ -27,18 +35,36 @@ public class Bullet : MonoBehaviour
         {
             Vector2 angle = mousePosition - GameObject.Find("Player_Punk").transform.parent.transform.position;
             if (GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().FacingRight) {
+                if (angle.x < 0)
+                {
+                    GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().Flip();
+                }
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
-            else {
+            else 
+            {
+                if (angle.x > 0)
+                {
+                    GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().Flip();
+                }
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         } else if (GameObject.Find("Player_Biker") != null && Vector2.Distance(GameObject.Find("Player_Biker").transform.position, transform.position) < 1) 
         {
             Vector2 angle = mousePosition - GameObject.Find("Player_Biker").transform.parent.transform.position;
             if (GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().FacingRight) {
+                if (angle.x < 0)
+                {
+                    GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().Flip();
+                }
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
-            else {
+            else 
+            {
+                if (angle.x > 0)
+                {
+                    GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().Flip();
+                }
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         }
