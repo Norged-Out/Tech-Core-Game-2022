@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     public PlayerHealth playerHealth;
     public HealthBar hpBar;
 
+    public AudioClip jumpSound;
+    private AudioSource playerAudio;
+
     public bool FacingRight = true;
     public bool isOnGround = true;
     public bool canMove;
@@ -29,15 +32,18 @@ public class PlayerController : MonoBehaviour
     public bool hasWeapon = false;
 
     public int maxJumps = 2;
-    private int jumps;
     public int movementTime = 10; // time in seconds; default 10
     public int attackTime = 20; // time in seconds; default 20 
+
     private int lowerBound = -6;
+    private int jumps;
 
     //public float launchPower = 10;
     public float jumpForce = 4;
     public float gravityModifier = 1;
     public float speed = 2;
+    public float jumpSoundVolume = 1;
+
     private float horizontalInput;
 
     private Vector2 jumpDirection = Vector2.up;
@@ -50,6 +56,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        playerAudio = GetComponent<AudioSource>();
         Physics.gravity *= gravityModifier;
         canMove = true;
         canAttack = false;
@@ -104,6 +111,21 @@ public class PlayerController : MonoBehaviour
             // Move the player
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
         }
+        else 
+        {
+            // Calculate vector in direction of intended movement
+            Vector2 movement = horizontalInput * moveDirection;
+            
+            //Rotate to face the direction of movement
+            if (horizontalInput > 0 && !FacingRight)
+            {
+                Flip();
+            }
+            else if (horizontalInput < 0 && FacingRight)
+            {
+                Flip();
+            }
+        }
 
         //launchVelocityVector = (transform.forward + transform.up) * launchPower;
         //launchPositionVector = transform.position + projectileOffset;
@@ -138,6 +160,8 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isOnGround = false;
             jumps = jumps - 1;
+
+            playerAudio.PlayOneShot(jumpSound, jumpSoundVolume);
         }
         if (jumps == 0)
         {
