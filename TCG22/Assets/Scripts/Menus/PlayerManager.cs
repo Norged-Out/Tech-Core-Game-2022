@@ -4,46 +4,92 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    public GameObject currPlayer;
     public GameObject[] playerList;
     private GameObject playerA;
     private GameObject playerB;
+    private PlayerController paController;
+    private PlayerController pbController;
+    private AnimationContoller paAnimator;
+    private AnimationContoller pbAnimator;
+    public HealthBar hpA;
+    public HealthBar hpB;
     public Camera overviewCamera;
     public Camera playerCamera;
+    public TimeTracker timeTracker;
+    private int numTurns;
+
+    private void Awake()
+    {
+        int _paIndex;
+        int _pbIndex;
+        do
+        {
+            _paIndex = Random.Range(0, 3);
+            _pbIndex = Random.Range(0, 3);
+        } while (_paIndex == _pbIndex);
+
+        playerA = Instantiate(playerList[_paIndex]) as GameObject;
+        playerB = Instantiate(playerList[_pbIndex]) as GameObject;
+
+
+        paController = playerA.GetComponent<PlayerController>();
+        pbController = playerB.GetComponent<PlayerController>();
+        paController.playerCamera = playerCamera;
+        paController.overviewCamera = overviewCamera;
+        pbController.playerCamera = playerCamera;
+        pbController.overviewCamera = overviewCamera;
+        paController.hpBar = hpA;
+        pbController.hpBar = hpB;
+        playerA.name = "Player A";
+        playerB.name = "Player B";
+        paController.enabled = true;
+        pbController.enabled = false;
+        playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
+        numTurns = 1;
+    }
 
     private void Start()
     {
-        playerList = GameObject.FindGameObjectsWithTag("Player");
-        playerA = playerList[0];
-        playerB = playerList[1];
-        currPlayer = playerA;
-        playerB.gameObject.SetActive(false);
-        playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
+        paAnimator = playerA.GetComponent<AnimationContoller>();
+        pbAnimator = playerB.GetComponent<AnimationContoller>();
+        pbAnimator.enabled = false;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S) && overviewCamera.enabled)
+        if (!timeTracker.turnActive)            //Input.GetKeyDown(KeyCode.S) && overviewCamera.enabled)
         {
-            SwapPlayer();
+            if(numTurns < 6)
+            {
+                numTurns++;
+                SwapPlayer();
+            }
+            else
+            {
+                timeTracker.timeTracker.text = "Game Over";
+            }
         }
     }
 
     private void SwapPlayer()
     {
-        if (playerA.activeSelf)
+        if (paController.enabled == true)
         {
-            playerB.gameObject.SetActive(true);
-            playerA.gameObject.SetActive(false);
+            pbController.enabled = true;
+            paController.enabled = false;
+            pbAnimator.enabled = true;
+            paAnimator.enabled = false;
             playerCamera.GetComponent<FollowPlayer>().setPlayer(playerB);
-            playerB.GetComponent<PlayerController>().resetTimer();
+            pbController.resetTimer();
         }
-        else if (playerB.activeSelf)
+        else if (pbController.enabled == true)
         {
-            playerA.gameObject.SetActive(true);
-            playerB.gameObject.SetActive(false);
+            paController.enabled = true;
+            pbController.enabled = false;
+            paAnimator.enabled = true;
+            pbAnimator.enabled = false;
             playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
-            playerA.GetComponent<PlayerController>().resetTimer();
+            paController.resetTimer();
         }
     }
 }
