@@ -67,6 +67,12 @@ public class PlayerController : MonoBehaviour
     // Use FixedUpdate for physics engine related events
     void FixedUpdate()
     {
+        // Too slow for gameplay for some reason
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         // Jump with space key
         // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
         if (Input.GetKeyDown(KeyCode.Space) && canMove)
@@ -74,11 +80,7 @@ public class PlayerController : MonoBehaviour
             Jump();
             //playerHealth.TakeDamage(10);
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
         // Left/right player movement with A, D keys
         horizontalInput = Input.GetAxis("Horizontal");
         if (canMove)
