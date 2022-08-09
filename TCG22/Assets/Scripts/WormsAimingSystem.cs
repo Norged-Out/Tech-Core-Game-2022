@@ -24,12 +24,12 @@ public class WormsAimingSystem : MonoBehaviour
             //Debug.Log(currPower);
             AimSprite = transform.parent.transform.Find("Aim").transform.GetComponent<SpriteRenderer>();
             
-            if(Input.GetMouseButton(1)){
+            if(Input.GetMouseButton(0)){
                 AimSprite.enabled = true;
                 CalculateAngle();
                 CalculatePower();
             }
-            else if(Input.GetMouseButtonUp(1)){
+            else if(Input.GetMouseButtonUp(0)){
                 Shoot.FireProjectile((int)currPower);
                 AimSprite.enabled = false;
                 AimSprite.transform.localScale = new Vector2(0.22f, 0.22f);
