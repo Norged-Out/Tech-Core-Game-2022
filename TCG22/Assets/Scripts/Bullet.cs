@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     public float speed;
     public Rigidbody2D rbBullet;
     public GameObject Explosion;
+    public string shotBy;
     void Start()
     {
         Vector3 mousePosition = Input.mousePosition;
@@ -15,6 +16,7 @@ public class Bullet : MonoBehaviour
 
         if (GameObject.Find("Player_Cyborg") != null && Vector2.Distance(GameObject.Find("Player_Cyborg").transform.position, transform.position) < 1) {
             Vector2 angle = mousePosition - GameObject.Find("Player_Cyborg").transform.parent.transform.position;
+            shotBy = GameObject.Find("Player_Cyborg").transform.parent.name;
             if (GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().FacingRight) {
                 if (angle.x < 0)
                 {
@@ -34,6 +36,7 @@ public class Bullet : MonoBehaviour
         else if (GameObject.Find("Player_Punk") != null && Vector2.Distance(GameObject.Find("Player_Punk").transform.position, transform.position) < 1)
         {
             Vector2 angle = mousePosition - GameObject.Find("Player_Punk").transform.parent.transform.position;
+            shotBy = GameObject.Find("Player_Punk").transform.parent.name;
             if (GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().FacingRight) {
                 if (angle.x < 0)
                 {
@@ -52,6 +55,7 @@ public class Bullet : MonoBehaviour
         } else if (GameObject.Find("Player_Biker") != null && Vector2.Distance(GameObject.Find("Player_Biker").transform.position, transform.position) < 1) 
         {
             Vector2 angle = mousePosition - GameObject.Find("Player_Biker").transform.parent.transform.position;
+            shotBy = GameObject.Find("Player_Biker").transform.parent.name;
             if (GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().FacingRight) {
                 if (angle.x < 0)
                 {
