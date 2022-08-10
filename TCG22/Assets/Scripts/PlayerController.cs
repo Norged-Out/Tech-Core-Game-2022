@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 20.0f;
     private float horizontalInput;
 
-    public HealthBar hpBar;
+    //public HealthBar hpBar;
     public TimeTracker timeTracker;
 
     private Vector2 jumpDirection = Vector2.up;

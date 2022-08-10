@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int playerHealth = 100;
     public HealthBar hpBar;
     public bool isAlive = true;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -19,17 +20,16 @@ public class PlayerHealth : MonoBehaviour
         {
             this.setHPBar(GameObject.Find("HealthBar B").GetComponent<HealthBar>());
         }
+        animator = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Check if player is still alive
-        if (playerHealth <= 0)
+        if (playerHealth <= 0 && isAlive)
         {
             isAlive = false;
-            playerHealth = 0;
-            hpBar.SetHealth(0);
+            Death();
         }
     }
 
@@ -37,17 +37,17 @@ public class PlayerHealth : MonoBehaviour
     {
         this.hpBar = healthBar;
         hpBar.MaxHealth(playerHealth);
-        this.GetComponent<PlayerController>().hpBar = healthBar;
     }
 
     public void TakeDamage(int damage)
     {
         playerHealth -= damage;
+        if (playerHealth <= 0) playerHealth = 0;
         hpBar.SetHealth(playerHealth);
     }
 
     public void Death()
     {
-        this.TakeDamage(playerHealth);
+        animator.SetTrigger("Death");
     }
 }

@@ -9,14 +9,17 @@ public class PlayerManager : MonoBehaviour
     private GameObject playerB;
     private PlayerController paController;
     private PlayerController pbController;
-    private AnimationContoller paAnimator;
-    private AnimationContoller pbAnimator;
     public HealthBar hpA;
     public HealthBar hpB;
     public Camera overviewCamera;
     public Camera playerCamera;
     public TimeTracker timeTracker;
     private int numTurns;
+    private GameObject opponent;
+    private GameObject currPlayer;
+    private bool gameOver = false;
+    //public DeathMenu deathMenu;
+    public ResultsScreen resultsScreen;
 
     private void Awake()
     {
@@ -46,18 +49,20 @@ public class PlayerManager : MonoBehaviour
         pbController.enabled = false;
         playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
         numTurns = 1;
-    }
-
-    private void Start()
-    {
-        paAnimator = playerA.GetComponent<AnimationContoller>();
-        pbAnimator = playerB.GetComponent<AnimationContoller>();
-        pbAnimator.enabled = false;
+        opponent = playerB;
+        currPlayer = playerA;
     }
 
     private void Update()
     {
-        if (!timeTracker.turnActive)            //Input.GetKeyDown(KeyCode.S) && overviewCamera.enabled)
+        if (opponent.GetComponent<PlayerHealth>().isAlive == false  && !gameOver)
+        {
+            gameOver = true;
+            //deathMenu.GameOver(opponent.name);
+            resultsScreen.GameOver(currPlayer.name, opponent.name);
+        }
+
+        if (!timeTracker.turnActive && !gameOver)            //Input.GetKeyDown(KeyCode.S) && overviewCamera.enabled)
         {
             if(numTurns < 6)
             {
@@ -77,19 +82,19 @@ public class PlayerManager : MonoBehaviour
         {
             pbController.enabled = true;
             paController.enabled = false;
-            pbAnimator.enabled = true;
-            paAnimator.enabled = false;
             playerCamera.GetComponent<FollowPlayer>().setPlayer(playerB);
             pbController.resetTimer();
+            opponent = playerA;
+            currPlayer = playerB;
         }
         else if (pbController.enabled == true)
         {
             paController.enabled = true;
             pbController.enabled = false;
-            paAnimator.enabled = true;
-            pbAnimator.enabled = false;
             playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
             paController.resetTimer();
+            opponent = playerB;
+            currPlayer = playerA;
         }
     }
 }
