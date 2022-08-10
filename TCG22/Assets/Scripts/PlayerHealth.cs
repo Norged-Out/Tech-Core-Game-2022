@@ -37,6 +37,7 @@ public class PlayerHealth : MonoBehaviour
     {
         this.hpBar = healthBar;
         hpBar.MaxHealth(playerHealth);
+        this.GetComponent<PlayerController>().hpBar = healthBar;
     }
 
     public void TakeDamage(int damage)
