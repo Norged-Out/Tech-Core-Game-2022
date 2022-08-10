@@ -54,7 +54,7 @@ public class WeaponSpawner : MonoBehaviour
                 Instantiate(Weapon10, transform.position, transform.rotation);
                 break; 
             }
-            Debug.Log("Ground");
+            //Debug.Log("Ground");
             Destroy(gameObject);
             }
         }

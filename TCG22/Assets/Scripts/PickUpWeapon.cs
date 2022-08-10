@@ -4,48 +4,42 @@ using UnityEngine;
 
 public class PickUpWeapon : MonoBehaviour
 {
-    public bool held;
+    public bool held = false;
     public Transform firePoint;
     public GameObject bulletPrefab;
     private GameObject arm;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        held = false;
-    }
-
-    // Update is called once per frame
+   
     void Update()
     {
         if (held)
         {
-            if (this.transform.parent.name == "Player_Cyborg")
+            //Debug.Log(this.transform.parent.Find("Player_Cyborg") != null);
+            //Debug.Log(this.transform.parent.Find("Player_Punk") != null);
+            //Debug.Log(this.transform.parent.Find("Player_Biker") != null);
+            if (this.transform.parent.Find("Player_Cyborg") !=  null)
             {
                 arm = this.transform.Find("Cyborg_Arm").gameObject;
             }
-            else if (this.transform.parent.name == "Player_Punk")
+            else if (this.transform.parent.Find("Player_Punk") != null)
             {
                 arm = this.transform.Find("Punk_Arm").gameObject;
             }
-            else if (this.transform.parent.name == "Player_Biker")
+            else if (this.transform.parent.Find("Player_Biker") != null)
             {
                 arm = this.transform.Find("Biker_Arm").gameObject;
             }
             arm.GetComponent<SpriteRenderer>().enabled = true;
             arm.GetComponent<Animator>().enabled = true;
-        }
 
-        if (Input.GetKey(KeyCode.F) && held)
-        {
-            Debug.Log("1");
+            if (Input.GetKey(KeyCode.F))
+            {
+            arm.GetComponent<SpriteRenderer>().enabled = false;
+            arm.GetComponent<Animator>().enabled = false;
             this.transform.parent = null;
             this.transform.position += Vector3.left;
             held = false;
-            
-            arm.GetComponent<SpriteRenderer>().enabled = false;
-            arm.GetComponent<Animator>().enabled = false;
-
+            //Debug.Log("Dropping");
+            }
         }
     }
 

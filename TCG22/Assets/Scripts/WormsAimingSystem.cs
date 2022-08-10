@@ -10,25 +10,30 @@ public class WormsAimingSystem : MonoBehaviour
     public float currAngle;
     public SpriteRenderer AimSprite;
     public WormsShooting Shoot;
-    public PlayerController player;
+    // public PlayerController player;
+    public PickUpWeapon isHeld;
     void Start(){
-        AimSprite.enabled = false;
+        // AimSprite.enabled = false;
+        // player = this.transform.parent.GetComponent<PlayerController>();
+        isHeld = this.GetComponent<PickUpWeapon>();
     }
     void Update()
     {
-        if(player.hasWeapon){
-        //Debug.Log(currAngle);
-        //Debug.Log(currPower);
-        if(Input.GetMouseButton(1)){
-            AimSprite.enabled = true;
-            CalculateAngle();
-            CalculatePower();
-        }
-        else if(Input.GetMouseButtonUp(1)){
-            Shoot.FireProjectile((int)currPower);
-            AimSprite.enabled = false;
-            AimSprite.transform.localScale = new Vector2(0.22f, 0.22f);
-            AimSprite.transform.rotation = Quaternion.AngleAxis(0f, Vector3.forward);
+        if (isHeld.held && this.transform.parent.GetComponent<PlayerController>().canAttack) {
+            //Debug.Log(currAngle);
+            //Debug.Log(currPower);
+            AimSprite = transform.parent.transform.Find("Aim").transform.GetComponent<SpriteRenderer>();
+            
+            if(Input.GetMouseButton(0)){
+                AimSprite.enabled = true;
+                CalculateAngle();
+                CalculatePower();
+            }
+            else if(Input.GetMouseButtonUp(0)){
+                Shoot.FireProjectile((int)currPower);
+                AimSprite.enabled = false;
+                AimSprite.transform.localScale = new Vector2(0.22f, 0.22f);
+                AimSprite.transform.rotation = Quaternion.AngleAxis(0f, Vector3.forward);
             }
         }
     }

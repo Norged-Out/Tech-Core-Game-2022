@@ -7,7 +7,6 @@ public class WormsProjectile : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody2D rbProjectile;
     public float AliveTime;
-    public float Radius;
     public GameObject ExplosionPrefab;
 
     void Awake()
@@ -39,7 +38,7 @@ public class WormsProjectile : MonoBehaviour
     }
 
     void Explode(){
-        Instantiate(ExplosionPrefab, transform.position, transform.rotation);
+        Instantiate(ExplosionPrefab, transform.position, ExplosionPrefab.transform.rotation);
         Destroy(gameObject);
     }
 }

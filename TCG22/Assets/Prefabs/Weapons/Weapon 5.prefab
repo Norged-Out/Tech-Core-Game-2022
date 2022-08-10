@@ -358,6 +358,8 @@ GameObject:
   - component: {fileID: 6392461526782527453}
   - component: {fileID: 6392461526782527452}
   - component: {fileID: 6392461526782527454}
+  - component: {fileID: -5354008181248103235}
+  - component: {fileID: -3452631550407168635}
   m_Layer: 0
   m_Name: Weapon 5
   m_TagString: Weapon 5
@@ -477,3 +479,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26, y: 0.07}
   m_EdgeRadius: 0
+--- !u!114 &-5354008181248103235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392461526782527441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3abf5b5f6c8024dbda15a7bf9b766e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minPower: 0
+  maxPower: 100
+  currPower: 0
+  currAngle: 0
+  AimSprite: {fileID: 0}
+  Shoot: {fileID: -3452631550407168635}
+  isHeld: {fileID: 0}
+--- !u!114 &-3452631550407168635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392461526782527441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3563b1aaf27e84f99a2722aa4b1c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 6119011314298967082, guid: 27909afbf96e63d4cb28866d2ee4aef6, type: 3}
+  Muzzle: {fileID: 0}
