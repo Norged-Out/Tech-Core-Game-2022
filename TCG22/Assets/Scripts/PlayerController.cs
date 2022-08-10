@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     public Camera overviewCamera;
 
+    public AudioClip jumpSound;
+    private AudioSource playerAudio;
+
     public bool FacingRight = true;
     public bool isOnGround = true;
     public bool canMove;
@@ -25,14 +28,15 @@ public class PlayerController : MonoBehaviour
     public bool isAlive = true;
 
     public int maxJumps = 2;
-    private int jumps;
     public int movementTime = 10; // time in seconds; default 10
-    public int attackTime = 20; // time in seconds; default 20 
+    public int attackTime = 20; // time in seconds; default 20
+    private int jumps;
 
     //public float launchPower = 10;
     public float jumpForce = 10;
     public float gravityModifier = 1;
     public float speed = 20.0f;
+    public float jumpSoundVolume = 1;
     private float horizontalInput;
 
     //public HealthBar hpBar;
@@ -48,6 +52,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        playerAudio = GetComponent<AudioSource>();
         Physics.gravity *= gravityModifier;
         canMove = true;
         canAttack = false;
@@ -120,6 +125,8 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isOnGround = false;
             jumps = jumps - 1;
+
+            playerAudio.PlayOneShot(jumpSound, jumpSoundVolume);
         }
         if (jumps == 0)
         {
