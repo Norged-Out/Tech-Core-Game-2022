@@ -100,7 +100,7 @@ public class Bullet : MonoBehaviour
         }
 
         // Damage player upon collision
-        else if (hitInfo.CompareTag("Player"))
+        else if (hitInfo.CompareTag("Player") && hitInfo.name.Equals(shotBy))
         {
             PlayerHealth playerHealth = hitInfo.gameObject.GetComponent<PlayerHealth>();
             // NOTE: change this so it's not a hardcoded value; perhaps add a 'public int damage' field to the bullet?
