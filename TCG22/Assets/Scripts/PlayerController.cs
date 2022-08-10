@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     public bool isAlive = true;
 
     public int maxJumps = 2;
-    public static int playerHealth = 100;
     private int jumps;
     public int movementTime = 10; // time in seconds; default 10
     public int attackTime = 20; // time in seconds; default 20 
@@ -36,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 20.0f;
     private float horizontalInput;
 
-    public HealthBar hpBar;
+    //public HealthBar hpBar;
     public TimeTracker timeTracker;
 
     private Vector2 jumpDirection = Vector2.up;
@@ -53,8 +52,7 @@ public class PlayerController : MonoBehaviour
         canMove = true;
         canAttack = false;
 
-        hpBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
-        hpBar.MaxHealth(playerHealth);
+        //hpBar.MaxHealth(playerHealth);
 
         timeTracker = GameObject.FindGameObjectWithTag("TimeTracker").GetComponent<TimeTracker>();
         timeTracker.setTimer(movementTime, attackTime, gameObject.name);
@@ -93,10 +91,7 @@ public class PlayerController : MonoBehaviour
         // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
         if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
-            Jump();
-            // the two lines below are for testing purposes.
-            playerHealth -= 10;
-            hpBar.SetHealth(playerHealth);
+            Jump();            
         }
 
         //launchVelocityVector = (transform.forward + transform.up) * launchPower;
@@ -106,13 +101,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && hasWeapon && canAttack)
         {
             Weapon.GetComponent<PickUpWeapon>().Shoot();
-        }
-
-        // Check if player is still alive
-        if (playerHealth < 0)
-        {
-            isAlive = false;
-            hpBar.SetHealth(0);
         }
     }
 
@@ -200,7 +188,7 @@ public class PlayerController : MonoBehaviour
     // Method to control collision events
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Weapon 1") && this.transform.childCount == 1)
+        if (collision.CompareTag("Weapon 1") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -218,7 +206,7 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 2") && this.transform.childCount == 1)
+        else if (collision.CompareTag("Weapon 2") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -236,7 +224,7 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 3") && this.transform.childCount == 1)
+        else if (collision.CompareTag("Weapon 3") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -254,7 +242,7 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 4") && this.transform.childCount == 1)
+        else if (collision.CompareTag("Weapon 4") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -272,7 +260,7 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 5") && this.transform.childCount == 1)
+        else if (collision.CompareTag("Weapon 5") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -290,7 +278,7 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 6") && this.transform.childCount == 1)
+        else if (collision.CompareTag("Weapon 6") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -308,7 +296,7 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-            else if (collision.CompareTag("Weapon 7") && this.transform.childCount == 1)
+            else if (collision.CompareTag("Weapon 7") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -326,7 +314,7 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 8") && this.transform.childCount == 1)
+        else if (collision.CompareTag("Weapon 8") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -344,7 +332,7 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 9") && this.transform.childCount == 1)
+        else if (collision.CompareTag("Weapon 9") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
@@ -362,7 +350,7 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 10") && this.transform.childCount == 1)
+        else if (collision.CompareTag("Weapon 10") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))

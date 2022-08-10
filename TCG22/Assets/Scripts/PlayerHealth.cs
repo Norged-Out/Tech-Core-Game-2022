@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int playerHealth = 100;
-    private HealthBar hpBar;
+    public int playerHealth = 100;
+    public HealthBar hpBar;
     public bool isAlive = true;
+    private Animator animator;
 
     // Start is called before the first frame update
-    /*void Start()
+    void Start()
     {
-        hpBar.MaxHealth(playerHealth);
-    }*/
+        if (this.transform.name.Equals("Player A"))
+        {
+            this.setHPBar(GameObject.Find("HealthBar A").GetComponent<HealthBar>());
+        }
+        else
+        {
+            this.setHPBar(GameObject.Find("HealthBar B").GetComponent<HealthBar>());
+        }
+        animator = gameObject.GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        // Check if player is still alive
-        if (playerHealth <= 0)
+        if (playerHealth <= 0 && isAlive)
         {
             isAlive = false;
-            playerHealth = 0;
-            hpBar.SetHealth(0);
+            Death();
         }
     }
 
@@ -35,11 +42,12 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         playerHealth -= damage;
+        if (playerHealth <= 0) playerHealth = 0;
         hpBar.SetHealth(playerHealth);
     }
 
     public void Death()
     {
-        this.TakeDamage(playerHealth);
+        animator.SetTrigger("Death");
     }
 }

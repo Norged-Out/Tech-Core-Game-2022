@@ -15,9 +15,9 @@ public class Bullet : MonoBehaviour
         mousePosition.z = Camera.main.nearClipPlane + 1;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (GameObject.Find("Player_Cyborg") != null && Vector2.Distance(GameObject.Find("Player_Cyborg").transform.position, transform.position) < 1) {
+        if (GameObject.Find("Player_Cyborg") != null && GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().canAttack) {
             Vector2 angle = mousePosition - GameObject.Find("Player_Cyborg").transform.parent.transform.position;
-            shotBy = GameObject.Find("Player_Cyborg").transform.parent.name;
+            shotBy = GameObject.Find("Player_Cyborg").transform.parent.gameObject.name;
 
             if (GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().FacingRight) {
                 if (angle.x < 0)
@@ -35,10 +35,10 @@ public class Bullet : MonoBehaviour
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         }
-        else if (GameObject.Find("Player_Punk") != null && Vector2.Distance(GameObject.Find("Player_Punk").transform.position, transform.position) < 1)
+        else if (GameObject.Find("Player_Punk") != null && GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().canAttack)
         {
             Vector2 angle = mousePosition - GameObject.Find("Player_Punk").transform.parent.transform.position;
-            shotBy = GameObject.Find("Player_Punk").transform.parent.name;
+            shotBy = GameObject.Find("Player_Punk").transform.parent.gameObject.name;
 
             if (GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().FacingRight) {
                 if (angle.x < 0)
@@ -55,11 +55,11 @@ public class Bullet : MonoBehaviour
                 }
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
-        } else if (GameObject.Find("Player_Biker") != null && Vector2.Distance(GameObject.Find("Player_Biker").transform.position, transform.position) < 1) 
+        } else if (GameObject.Find("Player_Biker") != null && GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().canAttack) 
         {
             Vector2 angle = mousePosition - GameObject.Find("Player_Biker").transform.parent.transform.position;
-            shotBy = GameObject.Find("Player_Biker").transform.parent.name;
-           
+            shotBy = GameObject.Find("Player_Biker").transform.parent.gameObject.name;
+
             if (GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().FacingRight) {
                 if (angle.x < 0)
                 {
