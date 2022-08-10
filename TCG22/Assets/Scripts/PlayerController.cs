@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Method to flip the character sprite
-    public void Flip()
+    private void Flip()
     {
         FacingRight = !FacingRight;
         transform.Rotate(0f, 180f, 0f);
