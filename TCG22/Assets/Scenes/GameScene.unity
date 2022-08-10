@@ -686,6 +686,8 @@ MonoBehaviour:
   overviewCamera: {fileID: 519420031}
   playerCamera: {fileID: 645610093}
   timeTracker: {fileID: 339267223}
+  opponent: {fileID: 0}
+  currPlayer: {fileID: 0}
   resultsScreen: {fileID: 2382539632015312479}
 --- !u!1 &411979178
 GameObject:
@@ -1276,7 +1278,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &713554499
 GameObject:
@@ -2836,7 +2838,7 @@ Transform:
   - {fileID: 337746991}
   - {fileID: 920445422}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1926816495
 GameObject:
@@ -3086,7 +3088,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2044464564
 GameObject:
@@ -3273,7 +3275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3598765605710767093, guid: e1facb7a0b4201b4ea968a2eabfbda1e, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3598765605710767093, guid: e1facb7a0b4201b4ea968a2eabfbda1e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3932,7 +3934,7 @@ Transform:
   - {fileID: 2382539632015312478}
   - {fileID: 2382539631871110298}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &2141395643740746026
 CanvasRenderer:

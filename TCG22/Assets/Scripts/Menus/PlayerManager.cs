@@ -15,8 +15,8 @@ public class PlayerManager : MonoBehaviour
     public Camera playerCamera;
     public TimeTracker timeTracker;
     private int numTurns;
-    private GameObject opponent;
-    private GameObject currPlayer;
+    public GameObject opponent;
+    public GameObject currPlayer;
     private bool gameOver = false;
     //public DeathMenu deathMenu;
     public ResultsScreen resultsScreen;
@@ -82,19 +82,19 @@ public class PlayerManager : MonoBehaviour
         {
             pbController.enabled = true;
             paController.enabled = false;
-            playerCamera.GetComponent<FollowPlayer>().setPlayer(playerB);
-            pbController.resetTimer();
             opponent = playerA;
             currPlayer = playerB;
+            playerCamera.GetComponent<FollowPlayer>().setPlayer(playerB);
+            pbController.resetTimer();
         }
         else if (pbController.enabled == true)
         {
             paController.enabled = true;
             pbController.enabled = false;
-            playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
-            paController.resetTimer();
             opponent = playerB;
             currPlayer = playerA;
+            playerCamera.GetComponent<FollowPlayer>().setPlayer(playerA);
+            paController.resetTimer();
         }
     }
 }
