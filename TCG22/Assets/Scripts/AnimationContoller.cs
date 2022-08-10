@@ -19,6 +19,12 @@ public class AnimationContoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerController.playerHealth == 0)
+        {
+            animator.SetTrigger("Death");
+
+        }
+
         // Checks if player has a weapon
         if (this.transform.childCount > 2)
         {

@@ -14,37 +14,30 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D playerRb;
 
-    public TimeTracker timeTracker;
-
     public Camera playerCamera;
     public Camera overviewCamera;
-
-    public PlayerHealth playerHealth;
-    public HealthBar hpBar;
-
-    public AudioClip jumpSound;
-    private AudioSource playerAudio;
 
     public bool FacingRight = true;
     public bool isOnGround = true;
     public bool canMove;
     public bool canAttack;
     public bool hasWeapon = false;
+    public bool isAlive = true;
 
     public int maxJumps = 2;
+    public static int playerHealth = 100;
+    private int jumps;
     public int movementTime = 10; // time in seconds; default 10
     public int attackTime = 20; // time in seconds; default 20 
 
-    private int lowerBound = -6;
-    private int jumps;
-
     //public float launchPower = 10;
-    public float jumpForce = 4;
+    public float jumpForce = 10;
     public float gravityModifier = 1;
-    public float speed = 2;
-    public float jumpSoundVolume = 1;
-
+    public float speed = 20.0f;
     private float horizontalInput;
+
+    public HealthBar hpBar;
+    public TimeTracker timeTracker;
 
     private Vector2 jumpDirection = Vector2.up;
     private Vector2 moveDirection = Vector2.right;
@@ -56,13 +49,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
-        playerAudio = GetComponent<AudioSource>();
         Physics.gravity *= gravityModifier;
         canMove = true;
         canAttack = false;
 
-        //hpBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
-        //playerHealth.setHPBar(hpBar);
+        hpBar.MaxHealth(playerHealth);
 
         timeTracker = GameObject.FindGameObjectWithTag("TimeTracker").GetComponent<TimeTracker>();
         timeTracker.setTimer(movementTime, attackTime, gameObject.name);
@@ -70,23 +61,9 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MovementCountdownRoutine());
     }
 
-    // Use FixedUpdate for physics engine related events
-    void FixedUpdate()
-    {
-        // Too slow for gameplay for some reason
-    }
-
     // Update is called once per frame
     void Update()
     {
-        // Jump with space key
-        // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
-        if (Input.GetKeyDown(KeyCode.Space) && canMove)
-        {
-            Jump();
-            //playerHealth.TakeDamage(10);
-        }
-
         // Left/right player movement with A, D keys
         horizontalInput = Input.GetAxis("Horizontal");
         if (canMove)
@@ -110,20 +87,15 @@ public class PlayerController : MonoBehaviour
             // Move the player
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
         }
-        else 
+
+        // Jump with space key
+        // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
+        if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
-            // Calculate vector in direction of intended movement
-            Vector2 movement = horizontalInput * moveDirection;
-            
-            //Rotate to face the direction of movement
-            if (horizontalInput > 0 && !FacingRight)
-            {
-                Flip();
-            }
-            else if (horizontalInput < 0 && FacingRight)
-            {
-                Flip();
-            }
+            Jump();
+            // the two lines below are for testing purposes.
+            playerHealth -= 10;
+            hpBar.SetHealth(playerHealth);
         }
 
         //launchVelocityVector = (transform.forward + transform.up) * launchPower;
@@ -135,10 +107,11 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().Shoot();
         }
 
-        // Kill player if they fall off the map
-        if (transform.position.y < lowerBound)
+        // Check if player is still alive
+        if (playerHealth < 0)
         {
-            playerHealth.Death();
+            isAlive = false;
+            hpBar.SetHealth(0);
         }
     }
 
@@ -155,12 +128,9 @@ public class PlayerController : MonoBehaviour
     {
         if (jumps > 0)
         {
-            //Debug.Log("FORCE APPLIED");
             playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isOnGround = false;
             jumps = jumps - 1;
-
-            playerAudio.PlayOneShot(jumpSound, jumpSoundVolume);
         }
         if (jumps == 0)
         {
@@ -168,7 +138,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Reset the timers and player state to start a new turn
     public void resetTimer()
     {
         StopAllCoroutines();
@@ -177,6 +146,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MovementCountdownRoutine());
 
     }
+
 
     // Determine if the player has collided with an object, such as the ground.
     // NOTE: Make sure the player has a Collider component of some kind, and
@@ -229,13 +199,13 @@ public class PlayerController : MonoBehaviour
     // Method to control collision events
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!hasWeapon && collision.CompareTag("Weapon 1") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        if (collision.CompareTag("Weapon 1") && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
             {
                 collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
+                Debug.Log("If passed");
             }
             else
             {
@@ -247,13 +217,13 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (!hasWeapon && collision.CompareTag("Weapon 2") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 2") && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
             {
                 collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
+                Debug.Log("If passed");
             }
             else
             {
@@ -265,13 +235,13 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (!hasWeapon && collision.CompareTag("Weapon 3") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 3") && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
             {
                 collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
+                Debug.Log("If passed");
             }
             else
             {
@@ -283,13 +253,13 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (!hasWeapon && collision.CompareTag("Weapon 4") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 4") && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
             {
                 collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
+                Debug.Log("If passed");
             }
             else
             {
@@ -301,64 +271,13 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (!hasWeapon && collision.CompareTag("Weapon 5") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 5") && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
             {
                 collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-        }
-        else if (!hasWeapon && collision.CompareTag("Weapon 6") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
-        {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-        }
-        else if (!hasWeapon && collision.CompareTag("Weapon 7") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
-        {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-        }
-        else if (!hasWeapon && collision.CompareTag("Weapon 8") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
-        {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
+                Debug.Log("If passed");
             }
             else
             {
@@ -370,13 +289,13 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (!hasWeapon && collision.CompareTag("Weapon 9") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 6") && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
             {
                 collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
+                Debug.Log("If passed");
             }
             else
             {
@@ -388,13 +307,13 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-        else if (!hasWeapon && collision.CompareTag("Weapon 10") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+            else if (collision.CompareTag("Weapon 7") && this.transform.childCount == 2)
         {
             collision.transform.parent = this.transform;
             if (this.transform.rotation.y.Equals(-1))
             {
                 collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                //Debug.Log("If passed");
+                Debug.Log("If passed");
             }
             else
             {
@@ -406,5 +325,69 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
+        else if (collision.CompareTag("Weapon 8") && this.transform.childCount == 2)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = collision.gameObject;
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 9") && this.transform.childCount == 2)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = collision.gameObject;
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+        else if (collision.CompareTag("Weapon 10") && this.transform.childCount == 2)
+        {
+            collision.transform.parent = this.transform;
+            if (this.transform.rotation.y.Equals(-1))
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+                Debug.Log("If passed");
+            }
+            else
+            {
+                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+            }
+            collision.transform.rotation = this.gameObject.transform.rotation;
+
+            Weapon = collision.gameObject;
+            Weapon.GetComponent<PickUpWeapon>().held = true;
+            hasWeapon = true;
+        }
+
+        /*
+        // Detect projectile hit - CURRENTLY BROKEN; PLAYER'S OWN PROJECTILE TRIGGERS THIS
+        if (collision.CompareTag("Projectile"))
+        {
+            // NOTE: Change this from a hard-coded number to a field of the projectile for variable damage
+            playerHealth -= 5;
+
+        }
+        */
     }
 }
