@@ -13,6 +13,9 @@ public class PickUpWeapon : MonoBehaviour
     {
         if (held)
         {
+            //Debug.Log(this.transform.parent.Find("Player_Cyborg") != null);
+            //Debug.Log(this.transform.parent.Find("Player_Punk") != null);
+            //Debug.Log(this.transform.parent.Find("Player_Biker") != null);
             if (this.transform.parent.Find("Player_Cyborg") !=  null)
             {
                 arm = this.transform.Find("Cyborg_Arm").gameObject;

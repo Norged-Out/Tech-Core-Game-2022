@@ -220,7 +220,7 @@ MonoBehaviour:
   timeTracker: {fileID: 0}
   playerCamera: {fileID: 6690518485262805881, guid: 157152c5017b33c4599d4916af41aa9e, type: 3}
   overviewCamera: {fileID: 808841557061548552, guid: a02313b5f1692f94aaea4e0d4144b94c, type: 3}
-  playerHealth: {fileID: 6156828913953419711}
+  playerHealth: {fileID: 0}
   hpBar: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: d49dc0ee8036948dbb7545dd08a89e9a, type: 3}
   FacingRight: 1
