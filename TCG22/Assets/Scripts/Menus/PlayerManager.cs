@@ -38,8 +38,8 @@ public class PlayerManager : MonoBehaviour
         paController.overviewCamera = overviewCamera;
         pbController.playerCamera = playerCamera;
         pbController.overviewCamera = overviewCamera;
-        paController.hpBar = hpA;
-        pbController.hpBar = hpB;
+        //paController.hpBar = hpA;
+        //pbController.hpBar = hpB;
         playerA.name = "Player A";
         playerB.name = "Player B";
         paController.enabled = true;

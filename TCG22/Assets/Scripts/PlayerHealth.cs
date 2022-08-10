@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int playerHealth = 100;
-    private HealthBar hpBar;
+    public int playerHealth = 100;
+    public HealthBar hpBar;
     public bool isAlive = true;
 
     // Start is called before the first frame update
-    /*void Start()
+    void Start()
     {
-        hpBar.MaxHealth(playerHealth);
-    }*/
+        if (this.transform.name.Equals("Player A"))
+        {
+            this.setHPBar(GameObject.Find("HealthBar A").GetComponent<HealthBar>());
+        }
+        else
+        {
+            this.setHPBar(GameObject.Find("HealthBar B").GetComponent<HealthBar>());
+        }
+    }
 
     // Update is called once per frame
     void Update()
