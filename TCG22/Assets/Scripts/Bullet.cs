@@ -15,10 +15,10 @@ public class Bullet : MonoBehaviour
         mousePosition.z = Camera.main.nearClipPlane + 1;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (GameObject.Find("Player_Cyborg") != null && Vector2.Distance(GameObject.Find("Player_Cyborg").transform.position, transform.position) < 1)
+        if (GameObject.Find("Player_Cyborg") != null && GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().canAttack)
         {
             Vector2 angle = mousePosition - GameObject.Find("Player_Cyborg").transform.parent.transform.position;
-            shotBy = GameObject.Find("Player_Cyborg").transform.parent.name;
+            shotBy = GameObject.Find("Player_Cyborg").transform.parent.gameObject.name;
 
             if (GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().FacingRight)
             {
@@ -37,10 +37,10 @@ public class Bullet : MonoBehaviour
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         }
-        else if (GameObject.Find("Player_Punk") != null && Vector2.Distance(GameObject.Find("Player_Punk").transform.position, transform.position) < 1)
+        else if (GameObject.Find("Player_Punk") != null && GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().canAttack)
         {
             Vector2 angle = mousePosition - GameObject.Find("Player_Punk").transform.parent.transform.position;
-            shotBy = GameObject.Find("Player_Punk").transform.parent.name;
+            shotBy = GameObject.Find("Player_Punk").transform.parent.gameObject.name;
 
             if (GameObject.Find("Player_Punk").transform.parent.GetComponent<PlayerController>().FacingRight)
             {
@@ -59,10 +59,10 @@ public class Bullet : MonoBehaviour
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         }
-        else if (GameObject.Find("Player_Biker") != null && Vector2.Distance(GameObject.Find("Player_Biker").transform.position, transform.position) < 1)
+        else if (GameObject.Find("Player_Biker") != null && GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().canAttack)
         {
             Vector2 angle = mousePosition - GameObject.Find("Player_Biker").transform.parent.transform.position;
-            shotBy = GameObject.Find("Player_Biker").transform.parent.name;
+            shotBy = GameObject.Find("Player_Biker").transform.parent.gameObject.name;
 
             if (GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().FacingRight)
             {
@@ -81,22 +81,11 @@ public class Bullet : MonoBehaviour
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         }
-        else if (GameObject.Find("Player_Biker") != null && Vector2.Distance(GameObject.Find("Player_Biker").transform.position, transform.position) < 1)
-        {
-            if (GameObject.Find("Player_Biker").transform.parent.GetComponent<PlayerController>().FacingRight)
-            {
-                rbBullet.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
-            }
-            else
-            {
-                rbBullet.AddForce(Vector2.left * speed, ForceMode2D.Impulse);
-            }
-        }
         else
         {
             //Debug.Log("RIP");
         }
-        Debug.Log(shotBy);
+        
     }
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
@@ -110,13 +99,14 @@ public class Bullet : MonoBehaviour
         }
 
         // Damage player upon collision
-        else if (hitInfo.CompareTag("Player") && !hitInfo.name.Equals(shotBy))
+        if (hitInfo.CompareTag("Player") && !hitInfo.name.Equals(shotBy))
         {
-            PlayerHealth playerHealth = hitInfo.gameObject.GetComponent<PlayerHealth>();
+            Debug.Log("Shot By: " + shotBy);
+            Debug.Log("Hit: " + hitInfo.name);
+
+            PlayerHealth playerHealth = hitInfo.GetComponent<PlayerHealth>();
             // NOTE: change this so it's not a hardcoded value; perhaps add a 'public int damage' field to the bullet?
             playerHealth.TakeDamage(10);
-
-            //Debug.Log(hitInfo.name);
 
             Instantiate(Explosion, transform.position, transform.rotation);
             Destroy(gameObject);
