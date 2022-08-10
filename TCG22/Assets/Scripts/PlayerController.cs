@@ -192,189 +192,71 @@ public class PlayerController : MonoBehaviour
         overviewCamera.enabled = false;
     }
 
+    private void OnTriggerEnter2DHelper(Collider2D collision)
+    {
+        collision.transform.parent = this.transform;
+        if (this.transform.rotation.y.Equals(-1))
+        {
+            collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
+            Debug.Log("If passed");
+        }
+        else
+        {
+            collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
+        }
+        collision.transform.rotation = this.gameObject.transform.rotation;
+
+        Weapon = collision.gameObject;
+        Weapon.GetComponent<PickUpWeapon>().held = true;
+        hasWeapon = true;
+    }
+
     // Method to control collision events
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Weapon 1") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
-        {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
+        bool isHeld = collision.GetComponent<PickUpWeapon>().held;
 
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
-        }
-        else if (collision.CompareTag("Weapon 2") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        if (collision.CompareTag("Weapon 1") && !isHeld && this.transform.childCount == 2)
         {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
+            OnTriggerEnter2DHelper(collision);
         }
-        else if (collision.CompareTag("Weapon 3") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 2") && !isHeld && this.transform.childCount == 2)
         {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
+            OnTriggerEnter2DHelper(collision);
         }
-        else if (collision.CompareTag("Weapon 4") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 3") && !isHeld && this.transform.childCount == 2)
         {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
+            OnTriggerEnter2DHelper(collision);
         }
-        else if (collision.CompareTag("Weapon 5") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 4") && !isHeld && this.transform.childCount == 2)
         {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
+            OnTriggerEnter2DHelper(collision);
         }
-        else if (collision.CompareTag("Weapon 6") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 5") && !isHeld && this.transform.childCount == 2)
         {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
+            OnTriggerEnter2DHelper(collision);
         }
-            else if (collision.CompareTag("Weapon 7") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 6") && !isHeld && this.transform.childCount == 2)
         {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
+            OnTriggerEnter2DHelper(collision);
         }
-        else if (collision.CompareTag("Weapon 8") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 7") && !isHeld && this.transform.childCount == 2)
         {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
+            OnTriggerEnter2DHelper(collision);
         }
-        else if (collision.CompareTag("Weapon 9") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 8") && !isHeld && this.transform.childCount == 2)
         {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
+            OnTriggerEnter2DHelper(collision);
         }
-        else if (collision.CompareTag("Weapon 10") && !collision.GetComponent<PickUpWeapon>().held && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 9") && !isHeld && this.transform.childCount == 2)
         {
-            collision.transform.parent = this.transform;
-            if (this.transform.rotation.y.Equals(-1))
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(-0.04f, 0.02f, 0));
-                Debug.Log("If passed");
-            }
-            else
-            {
-                collision.transform.position = this.gameObject.transform.position + (new Vector3(0.04f, 0.02f, 0));
-            }
-            collision.transform.rotation = this.gameObject.transform.rotation;
-
-            Weapon = collision.gameObject;
-            Weapon.GetComponent<PickUpWeapon>().held = true;
-            hasWeapon = true;
+            OnTriggerEnter2DHelper(collision);
         }
+        else if (collision.CompareTag("Weapon 10") && !isHeld && this.transform.childCount == 2)
+        {
+            OnTriggerEnter2DHelper(collision);
+        }
+        
 
         /*
         // Detect projectile hit - CURRENTLY BROKEN; PLAYER'S OWN PROJECTILE TRIGGERS THIS
