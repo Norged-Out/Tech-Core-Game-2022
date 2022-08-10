@@ -2231,7 +2231,7 @@ MonoBehaviour:
   mapComponentSize: 0.08
   width: 295
   height: 40
-  baseHeight: 0.01
+  baseHeight: 0.02
   useSeed: 0
   seed: 0
 --- !u!4 &1351676252 stripped
