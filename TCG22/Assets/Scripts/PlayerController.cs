@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     public bool isAlive = true;
 
     public int maxJumps = 2;
-    public static int playerHealth = 100;
     private int jumps;
     public int movementTime = 10; // time in seconds; default 10
     public int attackTime = 20; // time in seconds; default 20 
@@ -92,10 +91,7 @@ public class PlayerController : MonoBehaviour
         // NOTE: Make sure that the player object has a RigidBody component with gravity enabled!
         if (Input.GetKeyDown(KeyCode.Space) && canMove)
         {
-            Jump();
-            // the two lines below are for testing purposes.
-            playerHealth -= 10;
-            hpBar.SetHealth(playerHealth);
+            Jump();            
         }
 
         //launchVelocityVector = (transform.forward + transform.up) * launchPower;
@@ -105,13 +101,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && hasWeapon && canAttack)
         {
             Weapon.GetComponent<PickUpWeapon>().Shoot();
-        }
-
-        // Check if player is still alive
-        if (playerHealth < 0)
-        {
-            isAlive = false;
-            hpBar.SetHealth(0);
         }
     }
 

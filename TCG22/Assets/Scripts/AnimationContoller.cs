@@ -19,49 +19,51 @@ public class AnimationContoller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerController.playerHealth == 0)
+        if (!gameObject.GetComponent<PlayerHealth>().isAlive)
         {
             animator.SetTrigger("Death");
-
-        }
-
-        // Checks if player has a weapon
-        if (this.transform.childCount > 2)
-        {
-            animator.SetBool("hasWeapon", true);
-        }
-        else 
-        {
-            animator.SetBool("hasWeapon", false);
-        }
-
-        // Checks if Player is Running and that they ARE NOT jumping
-        if (Input.GetAxis("Horizontal") != 0 && !Input.GetKey(KeyCode.Space))
-        {
-            animator.SetBool("isRunning", true);
-
         }
         else
         {
-            animator.SetBool("isRunning", false);
-        }
-
-        // Checks if Player is Jumping
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+            // Checks if player has a weapon
             if (this.transform.childCount > 2)
             {
-                animator.Play("Jump2");
+                animator.SetBool("hasWeapon", true);
             }
             else
             {
-                animator.Play("Jump1");
+                animator.SetBool("hasWeapon", false);
+            }
+
+            // Checks if Player is Running and that they ARE NOT jumping
+            if (Input.GetAxis("Horizontal") != 0 && !Input.GetKey(KeyCode.Space))
+            {
+                animator.SetBool("isRunning", true);
+
+            }
+            else
+            {
+                animator.SetBool("isRunning", false);
+            }
+
+            // Checks if Player is Jumping
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (this.transform.childCount > 2)
+                {
+                    animator.Play("Jump2");
+                }
+                else
+                {
+                    animator.Play("Jump1");
+                }
+            }
+            // Gets the playerContoller scripts and checks if we are in the attack phase
+            if (transform.GetComponent<PlayerController>().canAttack)
+            {
+                animator.Play("Idle1");
             }
         }
-        // Gets the playerContoller scripts and checks if we are in the attack phase
-        if(transform.GetComponent<PlayerController>().canAttack)
-        {
-            animator.Play("Idle1");
-        }
+                
     }
 }
