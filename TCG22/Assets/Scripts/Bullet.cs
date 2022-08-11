@@ -9,11 +9,14 @@ public class Bullet : MonoBehaviour
     public GameObject Explosion;
     public string shotBy;
 
+    private SoundManager soundManager;
+
     void Start()
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = Camera.main.nearClipPlane + 1;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
         if (GameObject.Find("Player_Cyborg") != null && GameObject.Find("Player_Cyborg").transform.parent.GetComponent<PlayerController>().canAttack) {
             Vector2 angle = mousePosition - GameObject.Find("Player_Cyborg").transform.parent.transform.position;
@@ -110,6 +113,8 @@ public class Bullet : MonoBehaviour
             PlayerHealth playerHealth = hitInfo.gameObject.GetComponent<PlayerHealth>();
             // NOTE: change this so it's not a hardcoded value; perhaps add a 'public int damage' field to the bullet?
             playerHealth.TakeDamage(10);
+
+            soundManager.playHitSound();
 
             //Debug.Log(hitInfo.name);
 

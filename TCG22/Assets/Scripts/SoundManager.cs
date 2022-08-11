@@ -7,10 +7,19 @@ public class SoundManager : MonoBehaviour
     public AudioClip terrainDestructionSound;
     public AudioClip missionCompletedSound;
     public AudioClip youWinSound;
+    public AudioClip pickupWeaponSound;
+    public AudioClip dropWeaponSound;
+    public AudioClip shootSound;
+    public AudioClip hitSound;
 
     public float terrainDestructionSoundVolume = 1;
     public float missionCompletedSoundVolume = 1;
     public float youWinSoundVolume = 1;
+    public float pickupWeaponSoundVolume = 1;
+    public float dropWeaponSoundVolume = 1;
+    public float shootSoundVolume = 1;
+    public float hitSoundVolume = 1;
+
 
     private AudioSource soundPlayer;
 
@@ -24,6 +33,26 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void playPickupWeaponSound()
+    {
+        soundPlayer.PlayOneShot(pickupWeaponSound, pickupWeaponSoundVolume);
+    }
+
+    public void playDropWeaponSound()
+    {
+        soundPlayer.PlayOneShot(dropWeaponSound, dropWeaponSoundVolume);
+    }
+
+    public void playShootSound()
+    {
+        soundPlayer.PlayOneShot(shootSound, shootSoundVolume);
+    }
+
+    public void playHitSound()
+    {
+        soundPlayer.PlayOneShot(hitSound, hitSoundVolume);
     }
 
     public void playTerrainDestructionSound()
