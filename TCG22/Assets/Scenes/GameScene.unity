@@ -240,7 +240,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainDestructionSound: {fileID: 8300000, guid: d72be6024170c45c0b0cf64a5a1f98b7, type: 3}
+  missionCompletedSound: {fileID: 8300000, guid: 1c9f3b9185944415a962274b2da5d0f4, type: 3}
+  youWinSound: {fileID: 8300000, guid: 79bd0aa454a8c4e86a2ea6ee1df506e9, type: 3}
   terrainDestructionSoundVolume: 1
+  missionCompletedSoundVolume: 1
+  youWinSoundVolume: 1
 --- !u!82 &143732545
 AudioSource:
   m_ObjectHideFlags: 0
