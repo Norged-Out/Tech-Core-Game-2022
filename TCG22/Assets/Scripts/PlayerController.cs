@@ -237,47 +237,55 @@ public class PlayerController : MonoBehaviour
     // Method to control collision events
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        bool isHeld = collision.GetComponent<PickUpWeapon>().held;
-
-        if (collision.CompareTag("Weapon 1") && !isHeld && this.transform.childCount == 2)
+        if (collision.CompareTag("Weapon 1") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 2") && !isHeld && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 2") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 3") && !isHeld && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 3") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 4") && !isHeld && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 4") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 5") && !isHeld && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 5") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 6") && !isHeld && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 6") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 7") && !isHeld && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 7") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 8") && !isHeld && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 8") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 9") && !isHeld && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 9") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
-        else if (collision.CompareTag("Weapon 10") && !isHeld && this.transform.childCount == 2)
+        else if (collision.CompareTag("Weapon 10") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
+            hasWeapon = true;
         }
     }
 }
