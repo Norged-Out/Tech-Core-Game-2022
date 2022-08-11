@@ -177,7 +177,7 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 07b22194b780244d993d799e96cb733e, type: 3}
   pickupWeaponSound: {fileID: 8300000, guid: 64e34ea23223a424b81ae3d142625afa, type: 3}
   dropWeaponSound: {fileID: 8300000, guid: 61d3b0e197e28421d92a8ba34abcb57a, type: 3}
-  playerAudio: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: cd6843bc814ea49cd923673b23e7dcb2, type: 3}
   FacingRight: 1
   isOnGround: 1
   canMove: 0
@@ -193,6 +193,7 @@ MonoBehaviour:
   jumpSoundVolume: 1
   pickupWeaponSoundVolume: 2
   dropWeaponSoundVolume: 1
+  shootSoundVolume: 2
   timeTracker: {fileID: 0}
 --- !u!114 &7878588774490933623
 MonoBehaviour:

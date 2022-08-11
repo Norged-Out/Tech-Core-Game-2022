@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip pickupWeaponSound;
     public AudioClip dropWeaponSound;
+    public AudioClip shootSound;
     private AudioSource playerAudio;
 
     public bool FacingRight = true;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public float jumpSoundVolume = 1;
     public float pickupWeaponSoundVolume = 1;
     public float dropWeaponSoundVolume = 1;
+    public float shootSoundVolume = 1;
     private float horizontalInput;
 
     //public HealthBar hpBar;
@@ -110,10 +112,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && hasWeapon && canAttack)
         {
             Weapon.GetComponent<PickUpWeapon>().Shoot();
+            playerAudio.PlayOneShot(shootSound, shootSoundVolume);
         }
 
         // play drop weapon sound
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.F) && hasWeapon)
         {
             playerAudio.PlayOneShot(dropWeaponSound, dropWeaponSoundVolume);
         }
