@@ -32,10 +32,15 @@ public class ResultsScreen : MenuEssentials
             winText.text = playerA + " has won with remaining health: " + pAhealth.ToString("0");
             deathText.text = playerB + " lost with " + pBhealth.ToString("0") + " health";
         }
-        else
+        else if(pAhealth < pBhealth)
         {
             winText.text = playerB + " has won with remaining health: " + pBhealth.ToString("0");
             deathText.text = playerA + " lost with " + pAhealth.ToString("0") + " health";
+        }
+        else
+        {
+            winText.text = "The match has reached a tie";
+            deathText.text = "Well fought!";
         }
         results.SetActive(!results.activeSelf);
     }
