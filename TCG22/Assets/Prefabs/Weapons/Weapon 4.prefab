@@ -234,7 +234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6392461525475956818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.147, y: 0.028, z: 0}
+  m_LocalPosition: {x: 0.1457, y: 0.0299, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -344,8 +344,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   held: 0
+  delay: 0.7
   firePoint: {fileID: 6392461525475956819}
-  bulletPrefab: {fileID: 8393626696919308591, guid: a70f747303de34c4dbab0b88eb4f0e2a, type: 3}
+  bulletPrefab: {fileID: 8393626696919308591, guid: f376c1259ae68ec49be5cbf6d0c1dcf1, type: 3}
 --- !u!61 &6392461526782527454
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -370,7 +371,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.26, y: 0.07}
+  m_Size: {x: 0.29, y: 0.11}
   m_EdgeRadius: 0
 --- !u!1 &7738268730654154110
 GameObject:

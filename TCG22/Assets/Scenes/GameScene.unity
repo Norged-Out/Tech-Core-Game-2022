@@ -2632,7 +2632,7 @@ Transform:
   - {fileID: 337746991}
   - {fileID: 920445422}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1910550840
 PrefabInstance:
@@ -3102,6 +3102,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponManager
       objectReference: {fileID: 0}
+    - target: {fileID: 389986432044846152, guid: e1facb7a0b4201b4ea968a2eabfbda1e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3598765605710767093, guid: e1facb7a0b4201b4ea968a2eabfbda1e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3161,7 +3165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1739396800759053660, guid: 157152c5017b33c4599d4916af41aa9e, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1739396800759053660, guid: 157152c5017b33c4599d4916af41aa9e, type: 3}
       propertyPath: m_LocalPosition.x

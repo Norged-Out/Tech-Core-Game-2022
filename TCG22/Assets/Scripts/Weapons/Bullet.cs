@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed;
+    public int damage;
     public Rigidbody2D rbBullet;
     public GameObject Explosion;
     public string shotBy;
@@ -81,10 +82,6 @@ public class Bullet : MonoBehaviour
                 rbBullet.AddForce(angle.normalized * speed, ForceMode2D.Impulse);
             }
         }
-        else
-        {
-            //Debug.Log("RIP");
-        }
         
     }
     void OnTriggerEnter2D(Collider2D hitInfo)
@@ -106,7 +103,7 @@ public class Bullet : MonoBehaviour
 
             PlayerHealth playerHealth = hitInfo.GetComponent<PlayerHealth>();
             // NOTE: change this so it's not a hardcoded value; perhaps add a 'public int damage' field to the bullet?
-            playerHealth.TakeDamage(10);
+            playerHealth.TakeDamage(damage);
 
             Instantiate(Explosion, transform.position, transform.rotation);
             Destroy(gameObject);
