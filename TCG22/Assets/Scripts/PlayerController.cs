@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D playerRb;
 
+    public PlayerHealth playerHealth;
+
     public Camera playerCamera;
     public Camera overviewCamera;
 
@@ -25,12 +27,12 @@ public class PlayerController : MonoBehaviour
     public bool canMove;
     public bool canAttack;
     public bool hasWeapon = false;
-    public bool isAlive = true;
 
     public int maxJumps = 2;
     public int movementTime = 10; // time in seconds; default 10
     public int attackTime = 20; // time in seconds; default 20
     private int jumps;
+    private int lowerBound = -6;
 
     //public float launchPower = 10;
     public float jumpForce = 10;
@@ -106,6 +108,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && hasWeapon && canAttack)
         {
             Weapon.GetComponent<PickUpWeapon>().Shoot();
+        }
+
+        // Kill player if they fall off the map
+        if (transform.position.y < lowerBound)
+        {
+            playerHealth.TakeDamage(100);
         }
     }
 
@@ -375,15 +383,5 @@ public class PlayerController : MonoBehaviour
             Weapon.GetComponent<PickUpWeapon>().held = true;
             hasWeapon = true;
         }
-
-        /*
-        // Detect projectile hit - CURRENTLY BROKEN; PLAYER'S OWN PROJECTILE TRIGGERS THIS
-        if (collision.CompareTag("Projectile"))
-        {
-            // NOTE: Change this from a hard-coded number to a field of the projectile for variable damage
-            playerHealth -= 5;
-
-        }
-        */
     }
 }
