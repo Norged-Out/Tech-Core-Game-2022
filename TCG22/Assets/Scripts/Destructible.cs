@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
+    private SoundManager soundManager;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
@@ -18,8 +20,9 @@ public class Destructible : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Projectile")) 
+        if (collision.CompareTag("Projectile"))
         {
+            soundManager.playTerrainDestructionSound();
             Destroy(this.gameObject);
         }
     }
