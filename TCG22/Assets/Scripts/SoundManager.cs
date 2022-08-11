@@ -77,7 +77,7 @@ public class SoundManager : MonoBehaviour
 
     IEnumerator ParallelSoundClip()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         soundPlayer.PlayOneShot(youWinSound, youWinSoundVolume);
     }
 }

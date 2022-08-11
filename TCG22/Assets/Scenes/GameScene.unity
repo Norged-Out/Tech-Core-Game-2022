@@ -241,18 +241,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainDestructionSound: {fileID: 8300000, guid: d72be6024170c45c0b0cf64a5a1f98b7, type: 3}
   missionCompletedSound: {fileID: 8300000, guid: 1c9f3b9185944415a962274b2da5d0f4, type: 3}
+  gameOverSound: {fileID: 8300000, guid: 90d52a19205724a59ba224bc046244ce, type: 3}
   youWinSound: {fileID: 8300000, guid: 79bd0aa454a8c4e86a2ea6ee1df506e9, type: 3}
   pickupWeaponSound: {fileID: 8300000, guid: 64e34ea23223a424b81ae3d142625afa, type: 3}
   dropWeaponSound: {fileID: 8300000, guid: 61d3b0e197e28421d92a8ba34abcb57a, type: 3}
   shootSound: {fileID: 8300000, guid: cd6843bc814ea49cd923673b23e7dcb2, type: 3}
   hitSound: {fileID: 8300000, guid: e5d8e213201974d49836644bfdab5f90, type: 3}
-  terrainDestructionSoundVolume: 0.7
+  deathSound: {fileID: 8300000, guid: d0ca55130b4ed4635abda307192f9dcc, type: 3}
+  terrainDestructionSoundVolume: 0.4
   missionCompletedSoundVolume: 1
-  youWinSoundVolume: 1
+  gameOverSoundVolume: 2
+  youWinSoundVolume: 0.8
   pickupWeaponSoundVolume: 2
   dropWeaponSoundVolume: 0.7
   shootSoundVolume: 1
   hitSoundVolume: 2
+  deathSoundVolume: 1
 --- !u!82 &143732545
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1253,7 +1257,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 258d210b7713a4f9d99e75711db4f960, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
