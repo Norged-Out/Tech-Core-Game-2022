@@ -26,9 +26,8 @@ public class ResultsScreen : MonoBehaviour
     }
 
     IEnumerator ToggleDeath()
-    {
+    {        
+        yield return new WaitForSeconds(2);
         results.SetActive(!results.activeSelf);
-        yield return new WaitForSeconds(3);
-        deathText.enabled = true;
     }
 }

@@ -15,10 +15,10 @@ public class PlayerManager : MonoBehaviour
     public Camera playerCamera;
     public TimeTracker timeTracker;
     private int numTurns;
-    public GameObject opponent;
-    public GameObject currPlayer;
+    private GameObject opponent;
+    private GameObject currPlayer;
     private bool gameOver = false;
-    private bool isShown = false;
+    //private bool isShown = false;
     //public DeathMenu deathMenu;
     public ResultsScreen resultsScreen;
 
@@ -59,11 +59,18 @@ public class PlayerManager : MonoBehaviour
         if (opponent.GetComponent<PlayerHealth>().isAlive == false  && !gameOver)
         {
             gameOver = true;
-            StartCoroutine(GameOverRoutine());
+            currPlayer.GetComponent<PlayerController>().enabled = false;
+            resultsScreen.GameOver(currPlayer.name, opponent.name);
+            //StartCoroutine(GameOverRoutine());
             
         }
-
-        if (!timeTracker.turnActive && !gameOver)            //Input.GetKeyDown(KeyCode.S) && overviewCamera.enabled)
+        else if (currPlayer.GetComponent<PlayerHealth>().isAlive == false && !gameOver)
+        {
+            gameOver = true;
+            currPlayer.GetComponent<PlayerController>().enabled = false;
+            resultsScreen.GameOver(opponent.name, currPlayer.name);
+        }
+        else if (!timeTracker.turnActive && !gameOver)            //Input.GetKeyDown(KeyCode.S) && overviewCamera.enabled)
         {
             if(numTurns < 6)
             {
@@ -78,13 +85,13 @@ public class PlayerManager : MonoBehaviour
     }
 
     
-    IEnumerator GameOverRoutine()
-    {
-        yield return new WaitForSeconds(2);
+    //IEnumerator GameOverRoutine()
+    //{
+        //yield return new WaitForSeconds(2);
         //gameOver = true;
         //deathMenu.GameOver(opponent.name);
-        resultsScreen.GameOver(currPlayer.name, opponent.name);
-    }
+        //resultsScreen.GameOver(currPlayer.name, opponent.name);
+    //}
     
 
     private void SwapPlayer()

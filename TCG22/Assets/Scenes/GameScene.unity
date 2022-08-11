@@ -266,7 +266,7 @@ AudioSource:
   m_GameObject: {fileID: 143732543}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: a14593f8ed02a824385e0a01d53d7a87, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -845,8 +845,6 @@ MonoBehaviour:
   overviewCamera: {fileID: 519420031}
   playerCamera: {fileID: 645610093}
   timeTracker: {fileID: 339267223}
-  opponent: {fileID: 0}
-  currPlayer: {fileID: 0}
   resultsScreen: {fileID: 2382539632015312479}
 --- !u!1 &411979178
 GameObject:
@@ -1059,7 +1057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.42745098}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1254,7 +1252,7 @@ AudioSource:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: a14593f8ed02a824385e0a01d53d7a87, type: 2}
   m_audioClip: {fileID: 8300000, guid: 258d210b7713a4f9d99e75711db4f960, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
@@ -3077,8 +3075,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878571992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.13, y: 5.91, z: -9.8888445}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 2.13, y: 8.31, z: -9.8888445}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 250717797}
@@ -3967,10 +3965,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 916272954822298696}
   m_HandleRect: {fileID: 916272953448644182}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

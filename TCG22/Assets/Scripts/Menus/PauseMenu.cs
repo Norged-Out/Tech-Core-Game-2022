@@ -45,6 +45,6 @@ public class PauseMenu : MenuEssentials
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("MainVolume", volume);
+        audioMixer.SetFloat("MainVolume", Mathf.Log10(volume) * 20);
     }
 }
