@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ResultsScreen : MonoBehaviour
+public class ResultsScreen : MenuEssentials
 {
     public GameObject results;
     public TextMeshProUGUI deathText;
@@ -44,5 +44,15 @@ public class ResultsScreen : MonoBehaviour
     {        
         yield return new WaitForSeconds(2);
         results.SetActive(!results.activeSelf);
+    }
+
+    public void ReplayMatch()
+    {
+        Replay();
+    }
+
+    public void ExitMatch()
+    {
+        ReturnToStart();
     }
 }
