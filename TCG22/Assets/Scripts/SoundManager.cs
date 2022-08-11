@@ -6,19 +6,23 @@ public class SoundManager : MonoBehaviour
 {
     public AudioClip terrainDestructionSound;
     public AudioClip missionCompletedSound;
+    public AudioClip gameOverSound;
     public AudioClip youWinSound;
     public AudioClip pickupWeaponSound;
     public AudioClip dropWeaponSound;
     public AudioClip shootSound;
     public AudioClip hitSound;
+    public AudioClip deathSound;
 
     public float terrainDestructionSoundVolume = 1;
     public float missionCompletedSoundVolume = 1;
+    public float gameOverSoundVolume = 1;
     public float youWinSoundVolume = 1;
     public float pickupWeaponSoundVolume = 1;
     public float dropWeaponSoundVolume = 1;
     public float shootSoundVolume = 1;
     public float hitSoundVolume = 1;
+    public float deathSoundVolume = 1;
 
 
     private AudioSource soundPlayer;
@@ -55,6 +59,11 @@ public class SoundManager : MonoBehaviour
         soundPlayer.PlayOneShot(hitSound, hitSoundVolume);
     }
 
+    public void playDeathSound()
+    {
+        soundPlayer.PlayOneShot(deathSound, deathSoundVolume);
+    }
+
     public void playTerrainDestructionSound()
     {
         soundPlayer.PlayOneShot(terrainDestructionSound, terrainDestructionSoundVolume);
@@ -62,7 +71,7 @@ public class SoundManager : MonoBehaviour
 
     public void playGameOverSound()
     {
-        soundPlayer.PlayOneShot(missionCompletedSound, missionCompletedSoundVolume);
+        soundPlayer.PlayOneShot(gameOverSound, gameOverSoundVolume);
         StartCoroutine(ParallelSoundClip());
     }
 
