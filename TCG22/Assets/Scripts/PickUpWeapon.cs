@@ -8,7 +8,12 @@ public class PickUpWeapon : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     private GameObject arm;
-   
+
+    void Start()
+    {
+
+    }
+
     void Update()
     {
         if (held)
@@ -33,12 +38,12 @@ public class PickUpWeapon : MonoBehaviour
 
             if (Input.GetKey(KeyCode.F))
             {
-            arm.GetComponent<SpriteRenderer>().enabled = false;
-            arm.GetComponent<Animator>().enabled = false;
-            this.transform.parent = null;
-            this.transform.position += Vector3.left;
-            held = false;
-            //Debug.Log("Dropping");
+                arm.GetComponent<SpriteRenderer>().enabled = false;
+                arm.GetComponent<Animator>().enabled = false;
+                this.transform.parent = null;
+                this.transform.position += Vector3.left;
+                held = false;
+                //Debug.Log("Dropping");
             }
         }
     }

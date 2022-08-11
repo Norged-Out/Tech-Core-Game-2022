@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public Camera overviewCamera;
 
     public AudioClip jumpSound;
+    public AudioClip pickupWeaponSound;
+    public AudioClip dropWeaponSound;
     private AudioSource playerAudio;
 
     public bool FacingRight = true;
@@ -37,6 +39,8 @@ public class PlayerController : MonoBehaviour
     public float gravityModifier = 1;
     public float speed = 20.0f;
     public float jumpSoundVolume = 1;
+    public float pickupWeaponSoundVolume = 1;
+    public float dropWeaponSoundVolume = 1;
     private float horizontalInput;
 
     //public HealthBar hpBar;
@@ -106,6 +110,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && hasWeapon && canAttack)
         {
             Weapon.GetComponent<PickUpWeapon>().Shoot();
+        }
+
+        // play drop weapon sound
+        if (Input.GetKey(KeyCode.F))
+        {
+            playerAudio.PlayOneShot(dropWeaponSound, dropWeaponSoundVolume);
         }
     }
 
@@ -194,6 +204,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2DHelper(Collider2D collision)
     {
+        playerAudio.PlayOneShot(pickupWeaponSound, pickupWeaponSoundVolume);
+
         collision.transform.parent = this.transform;
         if (this.transform.rotation.y.Equals(-1))
         {
