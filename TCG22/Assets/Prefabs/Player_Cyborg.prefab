@@ -228,7 +228,7 @@ MonoBehaviour:
   hasWeapon: 0
   maxJumps: 2
   movementTime: 10
-  attackTime: 20
+  attackTime: 15
   jumpForce: 4
   gravityModifier: 1
   speed: 2

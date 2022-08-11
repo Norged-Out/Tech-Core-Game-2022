@@ -16,13 +16,28 @@ public class ResultsScreen : MonoBehaviour
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
-    public void GameOver(string winner, string loser)
+    public void GameOverbyDeath(string winner, string loser)
     {
         soundManager.playGameOverSound();
         Debug.Log("Game Over");
         deathText.text = loser + " has Died";
         winText.text = winner + " has survived till the end";
         StartCoroutine(ToggleDeath());
+    }
+
+    public void GameOverbyTurns(int pAhealth, int pBhealth, string playerA, string playerB)
+    {
+        if(pAhealth > pBhealth)
+        {
+            winText.text = playerA + " has won with remaining health: " + pAhealth.ToString("0");
+            deathText.text = playerB + " lost with " + pBhealth.ToString("0") + " health";
+        }
+        else
+        {
+            winText.text = playerB + " has won with remaining health: " + pBhealth.ToString("0");
+            deathText.text = playerA + " lost with " + pAhealth.ToString("0") + " health";
+        }
+        results.SetActive(!results.activeSelf);
     }
 
     IEnumerator ToggleDeath()

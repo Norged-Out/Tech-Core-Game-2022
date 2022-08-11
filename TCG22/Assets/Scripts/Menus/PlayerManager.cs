@@ -60,15 +60,14 @@ public class PlayerManager : MonoBehaviour
         {
             gameOver = true;
             currPlayer.GetComponent<PlayerController>().enabled = false;
-            resultsScreen.GameOver(currPlayer.name, opponent.name);
-            //StartCoroutine(GameOverRoutine());
+            resultsScreen.GameOverbyDeath(currPlayer.name, opponent.name);
             
         }
         else if (currPlayer.GetComponent<PlayerHealth>().isAlive == false && !gameOver)
         {
             gameOver = true;
             currPlayer.GetComponent<PlayerController>().enabled = false;
-            resultsScreen.GameOver(opponent.name, currPlayer.name);
+            resultsScreen.GameOverbyDeath(opponent.name, currPlayer.name);
         }
         else if (!timeTracker.turnActive && !gameOver)            //Input.GetKeyDown(KeyCode.S) && overviewCamera.enabled)
         {
@@ -79,6 +78,10 @@ public class PlayerManager : MonoBehaviour
             }
             else
             {
+                gameOver = true;
+                int pAhealth = playerA.GetComponent<PlayerHealth>().playerHealth;
+                int pBhealth = playerB.GetComponent<PlayerHealth>().playerHealth;
+                resultsScreen.GameOverbyTurns(pAhealth, pBhealth, playerA.name, playerB.name);
                 timeTracker.timeTracker.text = "Game Over";
             }
         }
