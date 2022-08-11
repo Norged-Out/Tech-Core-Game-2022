@@ -451,8 +451,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   held: 0
+  delay: 0.9
   firePoint: {fileID: 6392461525475956819}
-  bulletPrefab: {fileID: 8393626696919308591, guid: a70f747303de34c4dbab0b88eb4f0e2a, type: 3}
+  bulletPrefab: {fileID: 8393626696919308591, guid: c0dc7b589984c5e469ed85c55a8a5284, type: 3}
 --- !u!61 &6392461526782527454
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -477,7 +478,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.26, y: 0.07}
+  m_Size: {x: 0.28, y: 0.16}
   m_EdgeRadius: 0
 --- !u!114 &-5354008181248103235
 MonoBehaviour:

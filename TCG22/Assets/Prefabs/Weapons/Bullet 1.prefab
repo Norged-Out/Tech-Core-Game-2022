@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4942036330011489423}
   - component: {fileID: -7560687200413830915}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet 1
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8393626696919308591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,13 +75,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1000
-  m_Sprite: {fileID: 21300000, guid: 8f31b9283a66e45b0a0a93e63bda36ec, type: 3}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_SortingOrder: 300
+  m_Sprite: {fileID: 21300000, guid: a3b839d2b511b46ea806ded0c477c255, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.03, y: 0.03}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -122,7 +122,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.06, y: 0.04}
+  m_Size: {x: 0.03, y: 0.03}
   m_Direction: 0
 --- !u!114 &-7560687200413830915
 MonoBehaviour:
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  damage: 5
   rbBullet: {fileID: 6517554197729111446}
   Explosion: {fileID: 3995128203294167501, guid: ae607f3f9566ee74d9a61f71e1526c2b, type: 3}
   shotBy: 

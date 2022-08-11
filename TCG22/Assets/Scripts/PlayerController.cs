@@ -123,6 +123,11 @@ public class PlayerController : MonoBehaviour
         {
             playerHealth.TakeDamage(100);
         }
+
+        if (Input.GetKey(KeyCode.F) && hasWeapon)
+            {
+                hasWeapon = false;
+            }
     }
 
     // Method to flip the character sprite
