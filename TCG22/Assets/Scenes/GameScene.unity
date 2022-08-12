@@ -2330,7 +2330,7 @@ MonoBehaviour:
   height: 40
   baseHeight: 0.02
   useSeed: 0
-  seed: 0
+  seed: 3
 --- !u!4 &1351676252 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2906534157812164781, guid: 5149d5702605c2a46a51a0c605d56497, type: 3}

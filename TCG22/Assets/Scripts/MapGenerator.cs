@@ -106,8 +106,8 @@ public class MapGenerator : MonoBehaviour
         {
             if (mapStyle == 1)
             {
-                //Debug.Log("Middle Out");
                 CleanMapMiddleOut();
+                //Debug.Log("Middle Out");
             }
             else if (mapStyle == 2)
             {
