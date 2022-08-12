@@ -38,9 +38,9 @@ public class SettingsMenu : MenuEssentials
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-    public void SetVolume(float volume)
+    public void SetVolume(float sliderValue)
     {
-        audioMixer.SetFloat("MainVolume", volume);
+        audioMixer.SetFloat("MainVolume", Mathf.Log10(sliderValue) * 20);
     }
 
     public void SetQuality(int index)

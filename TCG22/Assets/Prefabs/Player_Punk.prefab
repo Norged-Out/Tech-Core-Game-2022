@@ -172,11 +172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba2f90426bb9f3489c9ee43e1d4f980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeTracker: {fileID: 0}
+  playerHealth: {fileID: 6945524136319226224}
   playerCamera: {fileID: 6690518485262805881, guid: 157152c5017b33c4599d4916af41aa9e, type: 3}
   overviewCamera: {fileID: 808841557061548552, guid: a02313b5f1692f94aaea4e0d4144b94c, type: 3}
-  playerHealth: {fileID: 0}
-  hpBar: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: 71884c18732f54807909955514ba2b4b, type: 3}
   FacingRight: 1
   isOnGround: 1
@@ -185,10 +183,12 @@ MonoBehaviour:
   hasWeapon: 0
   maxJumps: 2
   movementTime: 10
-  attackTime: 20
+  attackTime: 15
   jumpForce: 4
   gravityModifier: 1
   speed: 2
+  jumpSoundVolume: 1
+  timeTracker: {fileID: 0}
 --- !u!114 &2660374031981727437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36ba4793d8cd8004899612e36979278e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: 500
+  hpBar: {fileID: 0}
   isAlive: 1
 --- !u!82 &7381398216814143482
 AudioSource:

@@ -124,3 +124,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82db7548ffab14540a1dd2e3a2fd1ad0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrainDestructionSoundVolume: 1

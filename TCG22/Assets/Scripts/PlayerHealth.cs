@@ -8,10 +8,13 @@ public class PlayerHealth : MonoBehaviour
     public HealthBar hpBar;
     public bool isAlive = true;
     private Animator animator;
+    private SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+
         if (this.transform.name.Equals("Player A"))
         {
             this.setHPBar(GameObject.Find("HealthBar A").GetComponent<HealthBar>());
@@ -48,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Death()
     {
+        soundManager.playDeathSound();
         animator.SetTrigger("Death");
     }
 }
