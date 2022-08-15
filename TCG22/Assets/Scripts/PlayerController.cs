@@ -231,7 +231,6 @@ public class PlayerController : MonoBehaviour
 
         Weapon = collision.gameObject;
         Weapon.GetComponent<PickUpWeapon>().held = true;
-        hasWeapon = true;
     }
 
     // Method to control collision events
@@ -260,17 +259,14 @@ public class PlayerController : MonoBehaviour
         else if (collision.CompareTag("Weapon 5") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
-            hasWeapon = true;
         }
         else if (collision.CompareTag("Weapon 6") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
-            hasWeapon = true;
         }
         else if (collision.CompareTag("Weapon 7") && !hasWeapon && this.transform.childCount == 2)
         {
             OnTriggerEnter2DHelper(collision);
-            hasWeapon = true;
         }
         else if (collision.CompareTag("Weapon 8") && !hasWeapon && this.transform.childCount == 2)
         {
