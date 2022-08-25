@@ -1,2 +1,2 @@
-# Tech Core Game 2022
+# TechDuel.io
 This is an unautomated message to remind you about your car's extended warranty.
