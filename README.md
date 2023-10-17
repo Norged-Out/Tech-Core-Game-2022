@@ -2,7 +2,7 @@
 
 TechDuel.io is a 2D platformer turn-based shooter game developed as a project during the Game Development Internship with the University of Arizona Tech Core.
 
-## Demos
+## Demo Videos
 - [Team Explanation](https://youtu.be/3ZKnmwgh_kM?si=z9e2n8ikhjSoUyru)
 - [Demo Day](https://youtu.be/eogEoID1F5s?si=dcdnPXIk40XHRC1j)
 
